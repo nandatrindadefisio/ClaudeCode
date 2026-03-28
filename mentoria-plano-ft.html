@@ -1,0 +1,2267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mentoria Plano FT — Fernanda Trindade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Nunito:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brown-deep: #9a502f;
+    --brown-mid: #c29081;
+    --brown-light: #bd7f68;
+    --green-pale: #d3d8ad;
+    --green-olive: #9d9d70;
+    --green-mid: #95af71;
+    --navy: #1d2f55;
+    --charcoal: #545454;
+    --teal: #1f577b;
+    --cream: #F8F5F0;
+    --white: #FFFFFF;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Nunito', 'Century Gothic', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%; height: 100%;
+    background: #111;
+    font-family: var(--sans);
+    overflow: hidden;
+  }
+
+  #presentation {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slide {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .slide.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  /* Navigation */
+  #nav {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    z-index: 1000;
+    background: rgba(0,0,0,0.35);
+    padding: 10px 22px;
+    border-radius: 40px;
+    backdrop-filter: blur(8px);
+  }
+
+  .nav-btn {
+    background: none;
+    border: 1.5px solid rgba(255,255,255,0.5);
+    color: white;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .nav-btn:hover { background: rgba(255,255,255,0.15); border-color: white; }
+
+  #counter {
+    color: rgba(255,255,255,0.85);
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    min-width: 52px;
+    text-align: center;
+  }
+
+  /* Dot nav */
+  #dots {
+    display: flex; gap: 6px; align-items: center;
+  }
+  .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.35);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .dot.active { background: white; transform: scale(1.3); }
+
+  /* ============================================
+     SHARED SLIDE COMPONENTS
+  ============================================ */
+
+  .slide-inner {
+    width: 100%; height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    opacity: 0.7;
+  }
+
+  .slide-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .slide-subtitle {
+    font-family: var(--sans);
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    line-height: 1.6;
+  }
+
+  /* ============================================
+     SVG BOTANICAL ELEMENTS
+  ============================================ */
+
+  .botanical-corner-tl {
+    position: absolute; top: 0; left: 0;
+    width: 280px; opacity: 0.25;
+    pointer-events: none;
+  }
+  .botanical-corner-br {
+    position: absolute; bottom: 0; right: 0;
+    width: 280px; opacity: 0.25;
+    pointer-events: none;
+    transform: rotate(180deg);
+  }
+  .botanical-corner-tr {
+    position: absolute; top: 0; right: 0;
+    width: 240px; opacity: 0.2;
+    pointer-events: none;
+    transform: scaleX(-1);
+  }
+  .botanical-left {
+    position: absolute; left: -20px; top: 50%;
+    transform: translateY(-50%);
+    width: 200px; opacity: 0.18;
+    pointer-events: none;
+  }
+  .botanical-right {
+    position: absolute; right: -20px; top: 50%;
+    transform: translateY(-50%) scaleX(-1);
+    width: 200px; opacity: 0.18;
+    pointer-events: none;
+  }
+
+  /* ============================================
+     SLIDE 1 — COVER
+  ============================================ */
+  #s1 {
+    background: var(--navy);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+  }
+  #s1 .eyebrow {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    color: var(--green-pale);
+    margin-bottom: 8px;
+  }
+  #s1 .main-title {
+    font-family: var(--serif);
+    font-size: clamp(80px, 10vw, 140px);
+    font-weight: 600;
+    color: var(--cream);
+    line-height: 0.9;
+    letter-spacing: -2px;
+  }
+  #s1 .main-title span {
+    color: var(--green-pale);
+    display: block;
+    font-weight: 300;
+    font-size: clamp(36px, 4.5vw, 60px);
+    letter-spacing: 10px;
+    margin-bottom: 4px;
+  }
+  #s1 .tagline {
+    font-family: var(--sans);
+    font-size: clamp(13px, 1.4vw, 16px);
+    font-weight: 300;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 1.5px;
+    margin-top: 28px;
+    max-width: 540px;
+  }
+  #s1 .divider {
+    width: 60px; height: 1px;
+    background: var(--green-mid);
+    margin: 22px auto;
+    opacity: 0.6;
+  }
+  #s1 .author {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-top: 6px;
+  }
+
+  /* ============================================
+     SLIDE 2 — SOBRE FERNANDA
+  ============================================ */
+  #s2 {
+    background: var(--cream);
+    flex-direction: row;
+  }
+  #s2 .left-col {
+    flex: 1.3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 70px 60px 70px 80px;
+    position: relative;
+  }
+  #s2 .right-col {
+    flex: 0.7;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  #s2 .photo-placeholder {
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    border: 2.5px solid rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    color: rgba(255,255,255,0.4);
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    gap: 8px;
+    position: relative;
+    z-index: 1;
+  }
+  #s2 .quem-e {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--brown-deep);
+    margin-bottom: 18px;
+  }
+  #s2 .name {
+    font-family: var(--serif);
+    font-size: clamp(38px, 5vw, 60px);
+    font-weight: 500;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  #s2 .role {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--green-olive);
+    margin-bottom: 32px;
+  }
+  #s2 .bio {
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--charcoal);
+    max-width: 520px;
+    border-left: 2px solid var(--green-pale);
+    padding-left: 20px;
+  }
+  #s2 .s2-divider {
+    width: 40px; height: 1px;
+    background: var(--brown-mid);
+    margin: 24px 0;
+  }
+
+  /* ============================================
+     SLIDE 3 — COMO SURGIU
+  ============================================ */
+  #s3 {
+    background: var(--green-mid);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  #s3 .s3-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 16px;
+  }
+  #s3 .s3-title {
+    font-family: var(--serif);
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 500;
+    color: white;
+    margin-bottom: 60px;
+    font-style: italic;
+  }
+  #s3 .cards-row {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    max-width: 900px;
+  }
+  #s3 .origin-card {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 4px;
+    padding: 36px 30px;
+    flex: 1;
+    max-width: 260px;
+  }
+  #s3 .card-num {
+    font-family: var(--serif);
+    font-size: 52px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.3);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  #s3 .card-title {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 500;
+    color: white;
+    margin-bottom: 12px;
+  }
+  #s3 .card-text {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.7;
+  }
+
+  /* ============================================
+     SLIDE 4 — A PROMESSA
+  ============================================ */
+  #s4 {
+    background: var(--cream);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  #s4 .promise-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--brown-mid);
+    margin-bottom: 32px;
+  }
+  #s4 .promise-quote {
+    font-family: var(--serif);
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--navy);
+    max-width: 820px;
+    line-height: 1.3;
+    margin-bottom: 36px;
+  }
+  #s4 .promise-quote em {
+    color: var(--brown-deep);
+    font-style: normal;
+  }
+  #s4 .promise-line {
+    width: 50px; height: 1.5px;
+    background: var(--green-olive);
+    margin: 0 auto 28px;
+  }
+  #s4 .promise-sub {
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--charcoal);
+    max-width: 600px;
+    line-height: 1.8;
+  }
+
+  /* ============================================
+     SLIDE 5 — PARA QUEM É
+  ============================================ */
+  #s5 {
+    flex-direction: row;
+  }
+  #s5 .left-panel {
+    flex: 1;
+    background: var(--navy);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 70px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  #s5 .right-panel {
+    flex: 0.8;
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  #s5 .panel-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--green-pale);
+    margin-bottom: 20px;
+    opacity: 0.8;
+  }
+  #s5 .panel-title {
+    font-family: var(--serif);
+    font-size: clamp(26px, 3.5vw, 44px);
+    font-weight: 500;
+    color: white;
+    line-height: 1.2;
+    margin-bottom: 36px;
+  }
+  #s5 .check-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  #s5 .check-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+  }
+  #s5 .check-list li::before {
+    content: "✦";
+    color: var(--green-pale);
+    font-size: 10px;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+  #s5 .right-large-text {
+    font-family: var(--serif);
+    font-size: 120px;
+    font-weight: 300;
+    color: var(--green-pale);
+    opacity: 0.3;
+    position: absolute;
+    user-select: none;
+  }
+  #s5 .right-message {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--navy);
+    text-align: center;
+    line-height: 1.4;
+    padding: 40px;
+    position: relative;
+    z-index: 1;
+    font-style: italic;
+  }
+
+  /* ============================================
+     SLIDE 6 — VOCÊ SE RECONHECE?
+  ============================================ */
+  #s6 {
+    background: var(--brown-light);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  #s6 .s6-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  #s6 .s6-title {
+    font-family: var(--serif);
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 500;
+    color: white;
+    text-align: center;
+    margin-bottom: 44px;
+    font-style: italic;
+  }
+  #s6 .quotes-grid {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1000px;
+  }
+  #s6 .quote-card {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 3px;
+    padding: 20px 24px;
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    font-style: italic;
+    text-align: center;
+    min-width: 200px;
+    flex: 1;
+    max-width: 280px;
+    line-height: 1.5;
+  }
+  #s6 .quote-card::before {
+    content: '"';
+    font-size: 28px;
+    color: rgba(255,255,255,0.3);
+    display: block;
+    margin-bottom: 4px;
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+
+  /* ============================================
+     SLIDE 7 — CENÁRIO ATUAL VS DESEJADO
+  ============================================ */
+  #s7 {
+    flex-direction: row;
+  }
+  #s7 .hoje-panel {
+    flex: 1;
+    background: var(--navy);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 50px 60px 80px;
+    position: relative;
+  }
+  #s7 .depois-panel {
+    flex: 1;
+    background: var(--green-mid);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 80px 60px 50px;
+    position: relative;
+  }
+  #s7 .arrow-center {
+    width: 60px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: var(--navy);
+    flex-shrink: 0;
+    z-index: 10;
+  }
+  #s7 .panel-head {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 8px;
+  }
+  #s7 .panel-big {
+    font-family: var(--serif);
+    font-size: 56px;
+    font-weight: 300;
+    color: white;
+    line-height: 1;
+    margin-bottom: 32px;
+  }
+  #s7 .comparison-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  #s7 .comparison-list li {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.85);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 14px;
+  }
+  #s7 .hoje-panel .comparison-list li::before {
+    content: "—";
+    color: rgba(255,255,255,0.3);
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+  #s7 .depois-panel .comparison-list li::before {
+    content: "✓";
+    color: var(--green-pale);
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* ============================================
+     SLIDE 8 — A ESTRUTURA GERAL
+  ============================================ */
+  #s8 {
+    background: var(--cream);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  #s8 .s8-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--brown-mid);
+    margin-bottom: 16px;
+  }
+  #s8 .s8-title {
+    font-family: var(--serif);
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 52px;
+  }
+  #s8 .big-numbers {
+    display: flex;
+    gap: 0;
+    align-items: stretch;
+    margin-bottom: 44px;
+  }
+  #s8 .num-block {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 40px;
+    border-right: 1px solid rgba(0,0,0,0.08);
+  }
+  #s8 .num-block:last-child { border-right: none; }
+  #s8 .big-num {
+    font-family: var(--serif);
+    font-size: clamp(80px, 12vw, 140px);
+    font-weight: 300;
+    color: var(--brown-deep);
+    line-height: 0.85;
+    margin-bottom: 12px;
+  }
+  #s8 .num-label {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--navy);
+  }
+  #s8 .s8-sub {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--charcoal);
+    letter-spacing: 0.5px;
+    max-width: 520px;
+  }
+
+  /* ============================================
+     SLIDE 9 — 5 PILARES OVERVIEW
+  ============================================ */
+  #s9 {
+    background: var(--navy);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 60px;
+  }
+  #s9 .s9-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--green-pale);
+    opacity: 0.7;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  #s9 .s9-title {
+    font-family: var(--serif);
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 400;
+    color: white;
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  #s9 .pillars-row {
+    display: flex;
+    gap: 14px;
+    width: 100%;
+    max-width: 1200px;
+  }
+  #s9 .pillar-card {
+    flex: 1;
+    border-radius: 3px;
+    padding: 28px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  #s9 .pillar-card:nth-child(1) { background: var(--green-mid); }
+  #s9 .pillar-card:nth-child(2) { background: var(--brown-deep); }
+  #s9 .pillar-card:nth-child(3) { background: var(--teal); }
+  #s9 .pillar-card:nth-child(4) { background: var(--brown-mid); }
+  #s9 .pillar-card:nth-child(5) { background: var(--green-olive); }
+  #s9 .pc-num {
+    font-family: var(--serif);
+    font-size: 60px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.2);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  #s9 .pc-title {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    line-height: 1.3;
+    margin-bottom: 12px;
+    min-height: 52px;
+  }
+  #s9 .pc-meta {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+  }
+
+  /* ============================================
+     SLIDES 10–14 — PILAR DETAIL
+  ============================================ */
+  .pilar-slide {
+    flex-direction: row;
+  }
+  .pilar-accent {
+    width: 6px;
+    flex-shrink: 0;
+  }
+  .pilar-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 60px 70px;
+    background: var(--cream);
+    overflow: hidden;
+  }
+  .pilar-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 36px;
+  }
+  .pilar-big-num {
+    font-family: var(--serif);
+    font-size: 100px;
+    font-weight: 300;
+    line-height: 0.85;
+    flex-shrink: 0;
+  }
+  .pilar-title-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 8px;
+  }
+  .pilar-eyebrow {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-bottom: 6px;
+  }
+  .pilar-title {
+    font-family: var(--serif);
+    font-size: clamp(24px, 3vw, 40px);
+    font-weight: 500;
+    color: var(--navy);
+    line-height: 1.15;
+  }
+  .pilar-sub {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--charcoal);
+    margin-top: 6px;
+    opacity: 0.8;
+  }
+  .encontros-row {
+    display: flex;
+    gap: 20px;
+    flex: 1;
+  }
+  .encontro-card {
+    flex: 1;
+    background: white;
+    border-radius: 3px;
+    padding: 24px 22px;
+    border-top: 3px solid;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    overflow: hidden;
+  }
+  .encontro-num {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .encontro-title {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 4px;
+    line-height: 1.2;
+  }
+  .encontro-theme {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--charcoal);
+    font-style: italic;
+    margin-bottom: 16px;
+    opacity: 0.7;
+  }
+  .item-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .item-list li {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--charcoal);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.4;
+  }
+  .item-list li::before {
+    content: "·";
+    font-size: 18px;
+    line-height: 1;
+    color: var(--green-olive);
+    flex-shrink: 0;
+  }
+  .highlight-box {
+    background: var(--navy);
+    border-radius: 3px;
+    padding: 14px 18px;
+    margin-top: 14px;
+    font-family: var(--sans);
+    font-size: 11.5px;
+    font-weight: 300;
+    color: var(--green-pale);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* ============================================
+     SLIDE 15 — TIMELINE
+  ============================================ */
+  #s15 {
+    background: var(--navy);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 80px;
+  }
+  #s15 .tl-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 12px;
+  }
+  #s15 .tl-title {
+    font-family: var(--serif);
+    font-size: clamp(28px, 4vw, 50px);
+    font-weight: 400;
+    color: white;
+    margin-bottom: 52px;
+  }
+  #s15 .timeline-track {
+    width: 100%;
+    max-width: 1100px;
+    position: relative;
+  }
+  #s15 .tl-line {
+    height: 2px;
+    background: rgba(255,255,255,0.15);
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    right: 40px;
+  }
+  #s15 .months-row {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+  }
+  #s15 .month-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #s15 .month-dot {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+  }
+  #s15 .month-col:nth-child(1) .month-dot { background: var(--green-mid); }
+  #s15 .month-col:nth-child(2) .month-dot { background: var(--brown-deep); }
+  #s15 .month-col:nth-child(3) .month-dot { background: var(--teal); }
+  #s15 .month-col:nth-child(4) .month-dot { background: var(--brown-mid); }
+  #s15 .month-name {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 500;
+    color: white;
+    margin-bottom: 4px;
+  }
+  #s15 .month-sub {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.5;
+    color: white;
+    margin-bottom: 20px;
+  }
+  #s15 .month-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 3px;
+    padding: 20px 16px;
+    width: 90%;
+    text-align: center;
+  }
+  #s15 .month-pillars {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green-pale);
+    opacity: 0.7;
+    margin-bottom: 8px;
+  }
+  #s15 .month-encounters {
+    font-family: var(--serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: white;
+    margin-bottom: 8px;
+  }
+  #s15 .month-focus {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.5;
+  }
+
+  /* ============================================
+     SLIDE 16 — ENTREGÁVEIS
+  ============================================ */
+  #s16 {
+    background: var(--cream);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 80px;
+  }
+  #s16 .s16-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--brown-mid);
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  #s16 .s16-title {
+    font-family: var(--serif);
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  #s16 .deliverables-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    width: 100%;
+    max-width: 1100px;
+  }
+  #s16 .del-card {
+    background: white;
+    border-radius: 3px;
+    padding: 20px 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    text-align: center;
+    border-bottom: 2px solid;
+  }
+  #s16 .del-card:nth-child(1) { border-color: var(--green-mid); }
+  #s16 .del-card:nth-child(2) { border-color: var(--brown-deep); }
+  #s16 .del-card:nth-child(3) { border-color: var(--teal); }
+  #s16 .del-card:nth-child(4) { border-color: var(--brown-mid); }
+  #s16 .del-card:nth-child(5) { border-color: var(--green-olive); }
+  #s16 .del-card:nth-child(6) { border-color: var(--brown-light); }
+  #s16 .del-card:nth-child(7) { border-color: var(--green-mid); }
+  #s16 .del-card:nth-child(8) { border-color: var(--navy); }
+  #s16 .del-card:nth-child(9) { border-color: var(--brown-deep); }
+  #s16 .del-card:nth-child(10) { border-color: var(--teal); }
+  #s16 .del-check {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: var(--green-mid);
+  }
+  #s16 .del-text {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--navy);
+    line-height: 1.5;
+  }
+
+  /* ============================================
+     SLIDE 17 — TRANSFORMAÇÃO
+  ============================================ */
+  #s17 {
+    background: var(--green-olive);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 80px;
+    text-align: center;
+  }
+  #s17 .s17-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 12px;
+  }
+  #s17 .s17-title {
+    font-family: var(--serif);
+    font-size: clamp(26px, 3.5vw, 48px);
+    font-weight: 400;
+    color: white;
+    margin-bottom: 40px;
+    font-style: italic;
+  }
+  #s17 .transform-cols {
+    display: flex;
+    gap: 40px;
+    width: 100%;
+    max-width: 1000px;
+    align-items: stretch;
+    margin-bottom: 36px;
+  }
+  #s17 .before-col, #s17 .after-col {
+    flex: 1;
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+    padding: 28px 24px;
+    text-align: left;
+  }
+  #s17 .col-head {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 16px;
+  }
+  #s17 .transform-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  #s17 .transform-list li {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.9);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+  }
+  #s17 .before-col .transform-list li::before { content: "✕"; color: rgba(255,255,255,0.3); font-size: 10px; margin-top: 3px; }
+  #s17 .after-col .transform-list li::before { content: "✓"; color: var(--green-pale); font-size: 10px; font-weight: 700; margin-top: 3px; }
+  #s17 .arrow-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: rgba(255,255,255,0.5);
+    flex-shrink: 0;
+  }
+  #s17 .transform-tagline {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 400;
+    font-style: italic;
+    color: rgba(255,255,255,0.8);
+    max-width: 680px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 28px;
+    line-height: 1.6;
+  }
+  #s17 .transform-tagline strong {
+    color: white;
+    font-style: normal;
+  }
+
+  /* ============================================
+     SLIDE 18 — INVESTIMENTO
+  ============================================ */
+  #s18 {
+    background: var(--navy);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  #s18 .inv-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--green-pale);
+    opacity: 0.6;
+    margin-bottom: 16px;
+  }
+  #s18 .inv-title {
+    font-family: var(--serif);
+    font-size: clamp(32px, 5vw, 68px);
+    font-weight: 400;
+    color: white;
+    margin-bottom: 8px;
+  }
+  #s18 .inv-subtitle {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 44px;
+  }
+  #s18 .inv-box {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 4px;
+    padding: 44px 60px;
+    max-width: 560px;
+    width: 100%;
+    margin-bottom: 32px;
+  }
+  #s18 .inv-price-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 12px;
+  }
+  #s18 .inv-price {
+    font-family: var(--serif);
+    font-size: clamp(48px, 7vw, 88px);
+    font-weight: 300;
+    color: var(--green-pale);
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+  #s18 .inv-payment {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+  }
+  #s18 .inv-divider {
+    width: 40px; height: 1px;
+    background: rgba(255,255,255,0.15);
+    margin: 20px auto;
+  }
+  #s18 .inv-guarantee {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.5px;
+    max-width: 360px;
+  }
+
+  /* ============================================
+     SLIDE 19 — FAQ
+  ============================================ */
+  #s19 {
+    background: var(--cream);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 80px;
+  }
+  #s19 .faq-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--brown-mid);
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  #s19 .faq-title {
+    font-family: var(--serif);
+    font-size: clamp(28px, 3.5vw, 48px);
+    font-weight: 400;
+    color: var(--navy);
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  #s19 .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    max-width: 900px;
+    width: 100%;
+  }
+  #s19 .faq-card {
+    background: white;
+    border-radius: 3px;
+    padding: 22px 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border-left: 3px solid;
+  }
+  #s19 .faq-card:nth-child(1) { border-color: var(--green-mid); }
+  #s19 .faq-card:nth-child(2) { border-color: var(--brown-deep); }
+  #s19 .faq-card:nth-child(3) { border-color: var(--teal); }
+  #s19 .faq-card:nth-child(4) { border-color: var(--brown-mid); }
+  #s19 .faq-q {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 8px;
+    font-style: italic;
+  }
+  #s19 .faq-a {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--charcoal);
+    line-height: 1.65;
+  }
+
+  /* ============================================
+     SLIDE 20 — CTA FINAL
+  ============================================ */
+  #s20 {
+    background: var(--navy);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+  }
+  #s20 .cta-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--green-pale);
+    opacity: 0.6;
+    margin-bottom: 20px;
+  }
+  #s20 .cta-main {
+    font-family: var(--serif);
+    font-size: clamp(28px, 5vw, 68px);
+    font-weight: 400;
+    color: white;
+    line-height: 1.15;
+    max-width: 800px;
+    margin-bottom: 16px;
+  }
+  #s20 .cta-main em {
+    color: var(--green-pale);
+    font-style: italic;
+  }
+  #s20 .cta-sub {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1px;
+    margin-bottom: 44px;
+    max-width: 520px;
+  }
+  #s20 .cta-btn {
+    background: var(--brown-light);
+    color: white;
+    border: none;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    padding: 18px 52px;
+    border-radius: 2px;
+    cursor: pointer;
+    margin-bottom: 44px;
+    transition: background 0.2s;
+  }
+  #s20 .cta-btn:hover { background: var(--brown-deep); }
+  #s20 .cta-contact {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 1.5px;
+    line-height: 2;
+  }
+  #s20 .cta-divider {
+    width: 40px; height: 1px;
+    background: rgba(255,255,255,0.15);
+    margin: 20px auto;
+  }
+  #s20 .cta-brand {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 2px;
+  }
+
+  /* ============================================
+     INLINE SVG BOTANICAL HELPERS
+  ============================================ */
+  .botanical-svg {
+    position: absolute;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+
+<div id="presentation">
+
+  <!-- ==================== SLIDE 1: COVER ==================== -->
+  <div class="slide active" id="s1">
+    <!-- Botanical TL -->
+    <svg class="botanical-svg" style="top:0;left:0;width:300px;opacity:0.15" viewBox="0 0 300 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20,260 Q60,180 140,120" stroke="#d3d8ad" stroke-width="1.5" fill="none"/>
+      <ellipse cx="80" cy="200" rx="22" ry="13" transform="rotate(-40,80,200)" fill="#95af71" opacity="0.6"/>
+      <ellipse cx="108" cy="172" rx="20" ry="11" transform="rotate(-50,108,172)" fill="#9d9d70" opacity="0.5"/>
+      <ellipse cx="130" cy="148" rx="18" ry="10" transform="rotate(-55,130,148)" fill="#95af71" opacity="0.4"/>
+      <ellipse cx="55" cy="220" rx="18" ry="10" transform="rotate(-30,55,220)" fill="#d3d8ad" opacity="0.4"/>
+      <path d="M5,240 Q40,190 90,160" stroke="#d3d8ad" stroke-width="1" fill="none" opacity="0.5"/>
+      <ellipse cx="50" cy="195" rx="16" ry="9" transform="rotate(-45,50,195)" fill="#95af71" opacity="0.3"/>
+    </svg>
+    <!-- Botanical BR -->
+    <svg class="botanical-svg" style="bottom:0;right:0;width:300px;opacity:0.15;transform:rotate(180deg)" viewBox="0 0 300 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20,260 Q60,180 140,120" stroke="#d3d8ad" stroke-width="1.5" fill="none"/>
+      <ellipse cx="80" cy="200" rx="22" ry="13" transform="rotate(-40,80,200)" fill="#95af71" opacity="0.6"/>
+      <ellipse cx="108" cy="172" rx="20" ry="11" transform="rotate(-50,108,172)" fill="#9d9d70" opacity="0.5"/>
+      <ellipse cx="130" cy="148" rx="18" ry="10" transform="rotate(-55,130,148)" fill="#95af71" opacity="0.4"/>
+      <ellipse cx="55" cy="220" rx="18" ry="10" transform="rotate(-30,55,220)" fill="#d3d8ad" opacity="0.4"/>
+    </svg>
+    <!-- Botanical TR -->
+    <svg class="botanical-svg" style="top:0;right:0;width:240px;opacity:0.12;transform:scaleX(-1)" viewBox="0 0 300 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20,260 Q60,180 140,120" stroke="#d3d8ad" stroke-width="1.5" fill="none"/>
+      <ellipse cx="80" cy="200" rx="22" ry="13" transform="rotate(-40,80,200)" fill="#95af71" opacity="0.6"/>
+      <ellipse cx="108" cy="172" rx="20" ry="11" transform="rotate(-50,108,172)" fill="#9d9d70" opacity="0.5"/>
+      <ellipse cx="130" cy="148" rx="18" ry="10" transform="rotate(-55,130,148)" fill="#95af71" opacity="0.4"/>
+    </svg>
+
+    <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%">
+      <div class="eyebrow">Fernanda Trindade</div>
+      <div class="main-title">
+        <span>MENTORIA</span>
+        PLANO FT
+      </div>
+      <div class="divider"></div>
+      <div class="tagline">De fisioterapeuta invisível a referência lucrativa no particular</div>
+      <div class="author">Fisioterapeuta Pediátrica &amp; Mentora de Negócios</div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 2: SOBRE FERNANDA ==================== -->
+  <div class="slide" id="s2">
+    <div class="left-col">
+      <!-- Botanical accent -->
+      <svg class="botanical-svg" style="bottom:20px;left:20px;width:180px;opacity:0.12" viewBox="0 0 200 300" fill="none">
+        <path d="M100,290 Q80,200 60,120 Q50,80 80,40" stroke="#9d9d70" stroke-width="1.5" fill="none"/>
+        <ellipse cx="70" cy="180" rx="24" ry="14" transform="rotate(-30,70,180)" fill="#95af71"/>
+        <ellipse cx="80" cy="150" rx="22" ry="12" transform="rotate(-40,80,150)" fill="#9d9d70"/>
+        <ellipse cx="85" cy="120" rx="20" ry="11" transform="rotate(-50,85,120)" fill="#95af71" opacity="0.7"/>
+      </svg>
+      <div class="quem-e">Quem é</div>
+      <div class="name">Fernanda<br>Trindade</div>
+      <div class="role">Fisioterapeuta Pediátrica &amp; Mentora de Negócios</div>
+      <div class="s2-divider"></div>
+      <div class="bio">
+        Fisioterapeuta pediátrica com anos de experiência clínica, Fernanda trilhou o caminho que suas mentoradas agora percorrem — do trabalho excessivo e baixo lucro para um negócio estruturado, previsível e lucrativo.<br><br>
+        Hoje, além de atender, ela guia fisioterapeutas pediátricas a construírem negócios que refletem quem elas são e o quanto elas valem.
+      </div>
+    </div>
+    <div class="right-col">
+      <svg class="botanical-svg" style="top:0;right:0;width:220px;opacity:0.08" viewBox="0 0 300 280" fill="none">
+        <path d="M20,260 Q60,180 140,120" stroke="#d3d8ad" stroke-width="2" fill="none"/>
+        <ellipse cx="80" cy="200" rx="22" ry="13" transform="rotate(-40,80,200)" fill="#95af71"/>
+        <ellipse cx="108" cy="172" rx="20" ry="11" transform="rotate(-50,108,172)" fill="#9d9d70"/>
+      </svg>
+      <div class="photo-placeholder">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="16" r="10" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none"/>
+          <path d="M6,44 C6,33 42,33 42,44" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none"/>
+        </svg>
+        <span>Sua foto aqui</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 3: COMO SURGIU ==================== -->
+  <div class="slide" id="s3">
+    <!-- Botanical elements -->
+    <svg class="botanical-svg" style="top:0;left:0;width:220px;opacity:0.12" viewBox="0 0 300 280" fill="none">
+      <path d="M20,260 Q60,180 140,120" stroke="white" stroke-width="1.5" fill="none"/>
+      <ellipse cx="80" cy="200" rx="22" ry="13" transform="rotate(-40,80,200)" fill="white"/>
+      <ellipse cx="108" cy="172" rx="20" ry="11" transform="rotate(-50,108,172)" fill="white"/>
+      <ellipse cx="130" cy="148" rx="18" ry="10" transform="rotate(-55,130,148)" fill="white" opacity="0.7"/>
+    </svg>
+    <svg class="botanical-svg" style="bottom:0;right:0;width:220px;opacity:0.12;transform:rotate(180deg)" viewBox="0 0 300 280" fill="none">
+      <path d="M20,260 Q60,180 140,120" stroke="white" stroke-width="1.5" fill="none"/>
+      <ellipse cx="80" cy="200" rx="22" ry="13" transform="rotate(-40,80,200)" fill="white"/>
+      <ellipse cx="108" cy="172" rx="20" ry="11" transform="rotate(-50,108,172)" fill="white"/>
+    </svg>
+    <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:60px 80px">
+      <div class="s3-label">A origem</div>
+      <div class="s3-title">Como nasceu o Plano FT</div>
+      <div class="cards-row">
+        <div class="origin-card">
+          <div class="card-num">01</div>
+          <div class="card-title">Eu vivi isso</div>
+          <div class="card-text">Fernanda passou pelo mesmo ciclo de exaustão, atendimentos excessivos e pouco retorno financeiro que afeta tantas fisioterapeutas.</div>
+        </div>
+        <div class="origin-card">
+          <div class="card-num">02</div>
+          <div class="card-title">Aprendi na prática</div>
+          <div class="card-text">Estruturou seu próprio negócio do zero — aprendendo sobre precificação, posicionamento, presença digital e organização financeira.</div>
+        </div>
+        <div class="origin-card">
+          <div class="card-num">03</div>
+          <div class="card-title">Agora compartilho</div>
+          <div class="card-text">Transformou toda essa experiência em um método estruturado e progressivo de 4 meses para guiar outras fisioterapeutas.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 4: A PROMESSA ==================== -->
+  <div class="slide" id="s4">
+    <svg class="botanical-svg" style="top:20px;right:20px;width:200px;opacity:0.1" viewBox="0 0 240 300" fill="none">
+      <path d="M120,290 Q90,200 70,120 Q55,70 90,30" stroke="#9d9d70" stroke-width="1.5" fill="none"/>
+      <ellipse cx="85" cy="190" rx="26" ry="14" transform="rotate(-25,85,190)" fill="#9d9d70"/>
+      <ellipse cx="90" cy="155" rx="24" ry="13" transform="rotate(-35,90,155)" fill="#95af71"/>
+      <ellipse cx="92" cy="122" rx="22" ry="12" transform="rotate(-45,92,122)" fill="#9d9d70" opacity="0.7"/>
+    </svg>
+    <svg class="botanical-svg" style="bottom:20px;left:20px;width:200px;opacity:0.1;transform:rotate(180deg) scaleX(-1)" viewBox="0 0 240 300" fill="none">
+      <path d="M120,290 Q90,200 70,120 Q55,70 90,30" stroke="#9d9d70" stroke-width="1.5" fill="none"/>
+      <ellipse cx="85" cy="190" rx="26" ry="14" transform="rotate(-25,85,190)" fill="#9d9d70"/>
+      <ellipse cx="90" cy="155" rx="24" ry="13" transform="rotate(-35,90,155)" fill="#95af71"/>
+    </svg>
+    <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:60px 80px;text-align:center">
+      <div class="promise-label">A promessa da mentoria</div>
+      <div class="promise-quote">
+        "Você não precisa atender mais...<br>você precisa <em>estruturar</em> o que já tem."
+      </div>
+      <div class="promise-line"></div>
+      <div class="promise-sub">
+        Em 4 meses, você vai sair de fisioterapeuta operacional para profissional com negócio estruturado, lucrativo e previsível — sem precisar trabalhar mais, trabalhando melhor.
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 5: PARA QUEM É ==================== -->
+  <div class="slide" id="s5">
+    <div class="left-panel">
+      <svg class="botanical-svg" style="bottom:0;left:0;width:200px;opacity:0.08" viewBox="0 0 300 280" fill="none">
+        <path d="M20,260 Q60,180 140,120" stroke="white" stroke-width="2" fill="none"/>
+        <ellipse cx="80" cy="200" rx="22" ry="13" transform="rotate(-40,80,200)" fill="white"/>
+        <ellipse cx="108" cy="172" rx="20" ry="11" transform="rotate(-50,108,172)" fill="white"/>
+      </svg>
+      <div class="panel-label">Esta mentoria é para você</div>
+      <div class="panel-title">Se você se<br>reconhece aqui</div>
+      <ul class="check-list">
+        <li>Já atua como fisioterapeuta pediátrica mas sente que trabalha muito e ganha pouco</li>
+        <li>Tem dificuldade de precificar seus serviços com segurança e sem culpa</li>
+        <li>Quer se posicionar como referência na sua cidade — mas não sabe por onde começar</li>
+        <li>Está cansada de atender em várias cidades sem previsibilidade financeira</li>
+        <li>Quer uma agenda estratégica e um negócio que sustente sua qualidade de vida</li>
+        <li>Quer parar de depender de volume para faturar bem</li>
+      </ul>
+    </div>
+    <div class="right-panel">
+      <div class="right-large-text">FT</div>
+      <div class="right-message">
+        "Você não precisa de mais pacientes.<br>Você precisa de um <strong style="font-style:normal;color:var(--brown-deep)">negócio estruturado.</strong>"
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 6: VOCÊ SE RECONHECE? ==================== -->
+  <div class="slide" id="s6">
+    <svg class="botanical-svg" style="top:0;left:0;width:200px;opacity:0.1" viewBox="0 0 300 280" fill="none">
+      <path d="M20,260 Q60,180 140,120" stroke="white" stroke-width="1.5" fill="none"/>
+      <ellipse cx="80" cy="200" rx="22" ry="13" transform="rotate(-40,80,200)" fill="white"/>
+      <ellipse cx="108" cy="172" rx="20" ry="11" transform="rotate(-50,108,172)" fill="white"/>
+    </svg>
+    <svg class="botanical-svg" style="bottom:0;right:0;width:200px;opacity:0.1;transform:rotate(180deg)" viewBox="0 0 300 280" fill="none">
+      <path d="M20,260 Q60,180 140,120" stroke="white" stroke-width="1.5" fill="none"/>
+      <ellipse cx="80" cy="200" rx="22" ry="13" transform="rotate(-40,80,200)" fill="white"/>
+    </svg>
+    <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:50px 80px">
+      <div class="s6-label">Identificação</div>
+      <div class="s6-title">Você já disse alguma dessas frases?</div>
+      <div class="quotes-grid">
+        <div class="quote-card">Eu trabalho muito e não vejo resultado</div>
+        <div class="quote-card">Eu sei atender, mas não sei crescer</div>
+        <div class="quote-card">Eu não consigo cobrar mais</div>
+        <div class="quote-card">Eu não tenho organização nenhuma</div>
+        <div class="quote-card">Eu vivo cansada</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 7: CENÁRIO ATUAL VS DESEJADO ==================== -->
+  <div class="slide" id="s7">
+    <div class="hoje-panel">
+      <div class="panel-head">Cenário atual</div>
+      <div class="panel-big">Hoje</div>
+      <ul class="comparison-list">
+        <li>Trabalha em excesso</li>
+        <li>Atende em várias cidades</li>
+        <li>Cobra abaixo do valor</li>
+        <li>Agenda desorganizada</li>
+        <li>Sem posicionamento claro</li>
+        <li>Financeiro caótico</li>
+      </ul>
+    </div>
+    <div class="arrow-center">
+      <svg width="24" height="40" viewBox="0 0 24 40" fill="none">
+        <path d="M4,20 L20,20 M14,12 L22,20 L14,28" stroke="#1d2f55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="depois-panel">
+      <div class="panel-head">Cenário desejado</div>
+      <div class="panel-big">Depois</div>
+      <ul class="comparison-list">
+        <li>Trabalha menos com mais retorno</li>
+        <li>Agenda concentrada e estratégica</li>
+        <li>Cobra premium com segurança</li>
+        <li>Agenda previsível e otimizada</li>
+        <li>Reconhecida como referência</li>
+        <li>Lucro claro e estruturado</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 8: A ESTRUTURA GERAL ==================== -->
+  <div class="slide" id="s8">
+    <svg class="botanical-svg" style="top:0;right:0;width:220px;opacity:0.08" viewBox="0 0 300 280" fill="none">
+      <path d="M20,260 Q60,180 140,120" stroke="#9d9d70" stroke-width="2" fill="none"/>
+      <ellipse cx="80" cy="200" rx="22" ry="13" transform="rotate(-40,80,200)" fill="#9d9d70"/>
+      <ellipse cx="108" cy="172" rx="20" ry="11" transform="rotate(-50,108,172)" fill="#95af71"/>
+      <ellipse cx="130" cy="148" rx="18" ry="10" transform="rotate(-55,130,148)" fill="#9d9d70"/>
+    </svg>
+    <svg class="botanical-svg" style="bottom:0;left:0;width:220px;opacity:0.08;transform:rotate(180deg) scaleX(-1)" viewBox="0 0 300 280" fill="none">
+      <path d="M20,260 Q60,180 140,120" stroke="#9d9d70" stroke-width="2" fill="none"/>
+      <ellipse cx="80" cy="200" rx="22" ry="13" transform="rotate(-40,80,200)" fill="#9d9d70"/>
+      <ellipse cx="108" cy="172" rx="20" ry="11" transform="rotate(-50,108,172)" fill="#95af71"/>
+    </svg>
+    <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:60px 80px;text-align:center">
+      <div class="s8-label">A estrutura da mentoria</div>
+      <div class="s8-title">Uma jornada estratégica e progressiva</div>
+      <div class="big-numbers">
+        <div class="num-block">
+          <div class="big-num">4</div>
+          <div class="num-label">Meses</div>
+        </div>
+        <div class="num-block">
+          <div class="big-num">12</div>
+          <div class="num-label">Encontros</div>
+        </div>
+        <div class="num-block">
+          <div class="big-num">5</div>
+          <div class="num-label">Pilares</div>
+        </div>
+      </div>
+      <div class="s8-sub">Do alicerce ao próximo nível — cada encontro com propósito, cada pilar construindo sobre o anterior.</div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 9: OS 5 PILARES ==================== -->
+  <div class="slide" id="s9">
+    <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:60px 60px">
+      <div class="s9-label">A metodologia</div>
+      <div class="s9-title">Os 5 Pilares do Plano FT</div>
+      <div class="pillars-row">
+        <div class="pillar-card">
+          <div class="pc-num">01</div>
+          <div class="pc-title">Clareza e Identidade Estratégica</div>
+          <div class="pc-meta">2 encontros · Mês 1<br><br>O alicerce de tudo. Nicho, posicionamento e identidade.</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pc-num">02</div>
+          <div class="pc-title">Precificação e Estrutura de Negócio</div>
+          <div class="pc-meta">2 encontros · Mês 1–2<br><br>Cobrar com segurança e estruturar o negócio.</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pc-num">03</div>
+          <div class="pc-title">Presença Digital e Atração de Pacientes</div>
+          <div class="pc-meta">3 encontros · Mês 2–3<br><br>Instagram estratégico, conteúdo e conversão.</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pc-num">04</div>
+          <div class="pc-title">Organização e Controle do Negócio</div>
+          <div class="pc-meta">2 encontros · Mês 3<br><br>Gestão, processos e indicadores de crescimento.</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pc-num">05</div>
+          <div class="pc-title">Consolidação e Próximo Nível</div>
+          <div class="pc-meta">3 encontros · Mês 4<br><br>Ajustes, expansão e ritual de encerramento.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 10: PILAR 1 ==================== -->
+  <div class="slide pilar-slide" id="s10">
+    <div class="pilar-accent" style="background:var(--green-mid)"></div>
+    <div class="pilar-content">
+      <div class="pilar-header">
+        <div class="pilar-big-num" style="color:var(--green-mid)">01</div>
+        <div class="pilar-title-block">
+          <div class="pilar-eyebrow" style="color:var(--green-mid)">Pilar 1 · 2 encontros · Mês 1</div>
+          <div class="pilar-title">Clareza e Identidade Estratégica</div>
+          <div class="pilar-sub">O alicerce de tudo. Antes de postar ou precificar, você precisa saber quem você é.</div>
+        </div>
+      </div>
+      <div class="encontros-row">
+        <div class="encontro-card" style="border-top-color:var(--green-mid)">
+          <div class="encontro-num" style="color:var(--green-mid)">Encontro 1</div>
+          <div class="encontro-title">A Virada de Chave</div>
+          <div class="encontro-theme">Quem você é de verdade — e o que estava te travando</div>
+          <ul class="item-list">
+            <li>Diagnóstico de crenças limitantes sobre dinheiro e visibilidade</li>
+            <li>Mapeamento da jornada profissional até aqui</li>
+            <li>Identificação do maior medo que paralisa a ida para o particular</li>
+            <li>Definição do estilo de vida desejado</li>
+            <li>Primeira meta financeira realista e com prazo</li>
+          </ul>
+        </div>
+        <div class="encontro-card" style="border-top-color:var(--green-olive)">
+          <div class="encontro-num" style="color:var(--green-olive)">Encontro 2</div>
+          <div class="encontro-title">O Mapa Estratégico</div>
+          <div class="encontro-theme">Nicho, posicionamento e prioridades que geram resultado rápido</div>
+          <ul class="item-list">
+            <li>Definição do nicho estratégico com base no perfil e na demanda local</li>
+            <li>Construção da frase de posicionamento</li>
+            <li>Diagnóstico dos principais gargalos atuais</li>
+            <li>Limite de atendimentos com qualidade de vida</li>
+            <li>Definição das 3 prioridades de ação imediata</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 11: PILAR 2 ==================== -->
+  <div class="slide pilar-slide" id="s11">
+    <div class="pilar-accent" style="background:var(--brown-deep)"></div>
+    <div class="pilar-content">
+      <div class="pilar-header">
+        <div class="pilar-big-num" style="color:var(--brown-deep)">02</div>
+        <div class="pilar-title-block">
+          <div class="pilar-eyebrow" style="color:var(--brown-deep)">Pilar 2 · 2 encontros · Mês 1–2</div>
+          <div class="pilar-title">Precificação e Estrutura de Negócio</div>
+          <div class="pilar-sub">A mudança de mentalidade sobre dinheiro precisa acontecer antes da captação.</div>
+        </div>
+      </div>
+      <div class="encontros-row">
+        <div class="encontro-card" style="border-top-color:var(--brown-deep)">
+          <div class="encontro-num" style="color:var(--brown-deep)">Encontro 3</div>
+          <div class="encontro-title">O Dinheiro que Você Merece</div>
+          <div class="encontro-theme">Precificação de alto valor — sem culpa</div>
+          <ul class="item-list">
+            <li>Cálculo real do custo hora e do custo de vida desejado</li>
+            <li>Precificação baseada em valor percebido, não em mercado</li>
+            <li>Criação de pacotes premium (avulso vs. fechado)</li>
+            <li>Política de descontos inteligente</li>
+            <li>Reserva de segurança — o número que dá tranquilidade</li>
+          </ul>
+          <div class="highlight-box">✦ Quick win: ela sai com o preço novo definido e o compromisso de cobrar na próxima venda.</div>
+        </div>
+        <div class="encontro-card" style="border-top-color:var(--brown-light)">
+          <div class="encontro-num" style="color:var(--brown-light)">Encontro 4</div>
+          <div class="encontro-title">A Estrutura que Sustenta</div>
+          <div class="encontro-theme">Profissionalização do negócio</div>
+          <ul class="item-list">
+            <li>Organização financeira — PF vs. PJ: quando e por quê migrar</li>
+            <li>Definição do pró-labore</li>
+            <li>Estrutura mínima profissional: contrato, recibo, termos</li>
+            <li>Ferramentas básicas de controle financeiro</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 12: PILAR 3 ==================== -->
+  <div class="slide pilar-slide" id="s12">
+    <div class="pilar-accent" style="background:var(--teal)"></div>
+    <div class="pilar-content">
+      <div class="pilar-header">
+        <div class="pilar-big-num" style="color:var(--teal)">03</div>
+        <div class="pilar-title-block">
+          <div class="pilar-eyebrow" style="color:var(--teal)">Pilar 3 · 3 encontros · Mês 2–3</div>
+          <div class="pilar-title">Presença Digital e Atração de Pacientes</div>
+          <div class="pilar-sub">Atrair pacientes no Instagram não é só postar — é estratégia, narrativa e consistência.</div>
+        </div>
+      </div>
+      <div class="encontros-row">
+        <div class="encontro-card" style="border-top-color:var(--teal)">
+          <div class="encontro-num" style="color:var(--teal)">Encontro 5</div>
+          <div class="encontro-title">O Instagram que Converte</div>
+          <div class="encontro-theme">Transformar perfil em vitrine de autoridade</div>
+          <ul class="item-list">
+            <li>Auditoria do perfil: bio, destaques, feed, linguagem</li>
+            <li>Reescrita da bio com frase de posicionamento</li>
+            <li>3 pilares de conteúdo: autoridade, conexão e conversão</li>
+            <li>Estratégia de destaques que educam e vendem</li>
+            <li>Frequência mínima viável — sem burnout</li>
+          </ul>
+        </div>
+        <div class="encontro-card" style="border-top-color:var(--green-olive)">
+          <div class="encontro-num" style="color:var(--green-olive)">Encontro 6</div>
+          <div class="encontro-title">Conteúdo que Atrai</div>
+          <div class="encontro-theme">Criar sem travar — método prático</div>
+          <ul class="item-list">
+            <li>Diferença entre conteúdo de alcance e de conversão</li>
+            <li>Roteiro para vídeos curtos sem ser influencer</li>
+            <li>Os 5 tipos de post que geram agendamento</li>
+            <li>Calendário de conteúdo de 30 dias</li>
+            <li>Stories para criar relacionamento e urgência</li>
+          </ul>
+        </div>
+        <div class="encontro-card" style="border-top-color:var(--brown-mid)">
+          <div class="encontro-num" style="color:var(--brown-mid)">Encontro 7</div>
+          <div class="encontro-title">Do Seguidor ao Paciente</div>
+          <div class="encontro-theme">A conversão no WhatsApp e na primeira consulta</div>
+          <ul class="item-list">
+            <li>Fluxo: post → DM → WhatsApp → agendamento</li>
+            <li>Script de atendimento no WhatsApp</li>
+            <li>Como responder objeções sem ceder</li>
+            <li>Roteiro da primeira consulta que gera retenção</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 13: PILAR 4 ==================== -->
+  <div class="slide pilar-slide" id="s13">
+    <div class="pilar-accent" style="background:var(--brown-mid)"></div>
+    <div class="pilar-content">
+      <div class="pilar-header">
+        <div class="pilar-big-num" style="color:var(--brown-mid)">04</div>
+        <div class="pilar-title-block">
+          <div class="pilar-eyebrow" style="color:var(--brown-mid)">Pilar 4 · 2 encontros · Mês 3</div>
+          <div class="pilar-title">Organização e Controle do Negócio</div>
+          <div class="pilar-sub">Quando ela já tem o que organizar — a estrutura que sustenta o crescimento.</div>
+        </div>
+      </div>
+      <div class="encontros-row">
+        <div class="encontro-card" style="border-top-color:var(--brown-mid)">
+          <div class="encontro-num" style="color:var(--brown-mid)">Encontro 8</div>
+          <div class="encontro-title">A Estrutura Invisível</div>
+          <div class="encontro-theme">Semana ideal, fluxo de pacientes e padronização</div>
+          <ul class="item-list">
+            <li>Desenho da semana ideal (atendimento vs. horas estratégicas)</li>
+            <li>Fluxo completo do paciente: agendamento → atendimento → retorno</li>
+            <li>Padronização do atendimento — o que replicar em cada sessão</li>
+            <li>Automação de WhatsApp para confirmação e retenção</li>
+          </ul>
+        </div>
+        <div class="encontro-card" style="border-top-color:var(--brown-light)">
+          <div class="encontro-num" style="color:var(--brown-light)">Encontro 9</div>
+          <div class="encontro-title">Gestão e Indicadores</div>
+          <div class="encontro-theme">Controle sem planilhite</div>
+          <ul class="item-list">
+            <li>Os 5 números que toda fisioterapeuta particular precisa acompanhar</li>
+            <li>Organização da carteira de pacientes ativa vs. inativa</li>
+            <li>Ferramenta de gestão — Notion ou Trello aplicado à clínica</li>
+            <li>Controle de agenda e taxa de ocupação ideal</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 14: PILAR 5 ==================== -->
+  <div class="slide pilar-slide" id="s14">
+    <div class="pilar-accent" style="background:var(--navy)"></div>
+    <div class="pilar-content">
+      <div class="pilar-header">
+        <div class="pilar-big-num" style="color:var(--navy)">05</div>
+        <div class="pilar-title-block">
+          <div class="pilar-eyebrow" style="color:var(--navy)">Pilar 5 · 3 encontros · Mês 4</div>
+          <div class="pilar-title">Consolidação e Próximo Nível</div>
+          <div class="pilar-sub">A reta final não é revisão — é construção do futuro.</div>
+        </div>
+      </div>
+      <div class="encontros-row">
+        <div class="encontro-card" style="border-top-color:var(--navy)">
+          <div class="encontro-num" style="color:var(--navy)">Encontro 10</div>
+          <div class="encontro-title">Ajustes e Otimização</div>
+          <div class="encontro-theme">O que os dados estão dizendo</div>
+          <ul class="item-list">
+            <li>Análise dos indicadores dos últimos 3 meses</li>
+            <li>Revisão do posicionamento com base em resultados reais</li>
+            <li>Ajustes de preço, agenda e estratégia de conteúdo</li>
+            <li>Identificação dos gargalos que ainda existem</li>
+          </ul>
+        </div>
+        <div class="encontro-card" style="border-top-color:var(--teal)">
+          <div class="encontro-num" style="color:var(--teal)">Encontro 11</div>
+          <div class="encontro-title">Expansão Estratégica</div>
+          <div class="encontro-theme">O próximo nível — com clareza, não com pressa</div>
+          <ul class="item-list">
+            <li>Consultório próprio, sala compartilhada ou domiciliar?</li>
+            <li>Parcerias estratégicas locais: médicos, academias, estúdios</li>
+            <li>Fortalecimento da marca pessoal além do Instagram</li>
+            <li>Planejamento de crescimento para os próximos 6 meses</li>
+          </ul>
+        </div>
+        <div class="encontro-card" style="border-top-color:var(--green-mid)">
+          <div class="encontro-num" style="color:var(--green-mid)">Encontro 12</div>
+          <div class="encontro-title">A Fisioterapeuta que Você Virou</div>
+          <div class="encontro-theme">Ritual de encerramento e compromisso com o futuro</div>
+          <ul class="item-list">
+            <li>Celebração: comparativo real antes x depois</li>
+            <li>Releitura da carta escrita no Encontro 1</li>
+            <li>Declaração de posicionamento renovado</li>
+            <li>Ritual de encerramento: carta para si mesma no futuro</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 15: TIMELINE ==================== -->
+  <div class="slide" id="s15">
+    <svg class="botanical-svg" style="top:0;left:0;width:180px;opacity:0.08" viewBox="0 0 300 280" fill="none">
+      <path d="M20,260 Q60,180 140,120" stroke="white" stroke-width="1.5" fill="none"/>
+      <ellipse cx="80" cy="200" rx="22" ry="13" transform="rotate(-40,80,200)" fill="white"/>
+      <ellipse cx="108" cy="172" rx="20" ry="11" transform="rotate(-50,108,172)" fill="white"/>
+    </svg>
+    <svg class="botanical-svg" style="bottom:0;right:0;width:180px;opacity:0.08;transform:rotate(180deg)" viewBox="0 0 300 280" fill="none">
+      <path d="M20,260 Q60,180 140,120" stroke="white" stroke-width="1.5" fill="none"/>
+      <ellipse cx="80" cy="200" rx="22" ry="13" transform="rotate(-40,80,200)" fill="white"/>
+    </svg>
+    <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:50px 80px">
+      <div class="tl-label">Cronograma</div>
+      <div class="tl-title">4 meses de jornada estratégica</div>
+      <div class="timeline-track">
+        <div class="tl-line"></div>
+        <div class="months-row">
+          <div class="month-col">
+            <div class="month-dot">1</div>
+            <div class="month-name">O Alicerce</div>
+            <div class="month-sub">Mês 1</div>
+            <div class="month-card">
+              <div class="month-pillars">Pilares 1 &amp; 2</div>
+              <div class="month-encounters">Encontros 1–4</div>
+              <div class="month-focus">Clareza · Identidade<br>Precificação · Estrutura</div>
+            </div>
+          </div>
+          <div class="month-col">
+            <div class="month-dot">2</div>
+            <div class="month-name">A Vitrine</div>
+            <div class="month-sub">Mês 2</div>
+            <div class="month-card">
+              <div class="month-pillars">Pilar 3</div>
+              <div class="month-encounters">Encontros 5–7</div>
+              <div class="month-focus">Instagram · Conteúdo<br>Conversão de pacientes</div>
+            </div>
+          </div>
+          <div class="month-col">
+            <div class="month-dot">3</div>
+            <div class="month-name">A Estrutura</div>
+            <div class="month-sub">Mês 3</div>
+            <div class="month-card">
+              <div class="month-pillars">Pilar 4</div>
+              <div class="month-encounters">Encontros 8–9</div>
+              <div class="month-focus">Organização · Gestão<br>Indicadores de crescimento</div>
+            </div>
+          </div>
+          <div class="month-col">
+            <div class="month-dot">4</div>
+            <div class="month-name">O Futuro</div>
+            <div class="month-sub">Mês 4</div>
+            <div class="month-card">
+              <div class="month-pillars">Pilar 5</div>
+              <div class="month-encounters">Encontros 10–12</div>
+              <div class="month-focus">Ajustes · Expansão<br>Celebração &amp; próximo nível</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 16: ENTREGÁVEIS ==================== -->
+  <div class="slide" id="s16">
+    <svg class="botanical-svg" style="top:0;right:0;width:180px;opacity:0.07" viewBox="0 0 300 280" fill="none">
+      <path d="M20,260 Q60,180 140,120" stroke="#9d9d70" stroke-width="2" fill="none"/>
+      <ellipse cx="80" cy="200" rx="22" ry="13" transform="rotate(-40,80,200)" fill="#9d9d70"/>
+      <ellipse cx="108" cy="172" rx="20" ry="11" transform="rotate(-50,108,172)" fill="#95af71"/>
+    </svg>
+    <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:50px 80px">
+      <div class="s16-label">O que está incluído</div>
+      <div class="s16-title">O que você recebe</div>
+      <div class="deliverables-grid">
+        <div class="del-card">
+          <div class="del-check">✦</div>
+          <div class="del-text">12 encontros estratégicos ao vivo (60–90 min cada)</div>
+        </div>
+        <div class="del-card">
+          <div class="del-check">✦</div>
+          <div class="del-text">Materiais exclusivos por pilar</div>
+        </div>
+        <div class="del-card">
+          <div class="del-check">✦</div>
+          <div class="del-text">Suporte entre os encontros</div>
+        </div>
+        <div class="del-card">
+          <div class="del-check">✦</div>
+          <div class="del-text">Exercícios práticos com aplicação imediata</div>
+        </div>
+        <div class="del-card">
+          <div class="del-check">✦</div>
+          <div class="del-text">Calendário de conteúdo personalizado</div>
+        </div>
+        <div class="del-card">
+          <div class="del-check">✦</div>
+          <div class="del-text">Scripts e roteiros de atendimento</div>
+        </div>
+        <div class="del-card">
+          <div class="del-check">✦</div>
+          <div class="del-text">Ferramentas de gestão financeira</div>
+        </div>
+        <div class="del-card">
+          <div class="del-check">✦</div>
+          <div class="del-text">Plano de continuidade pós-mentoria</div>
+        </div>
+        <div class="del-card">
+          <div class="del-check">✦</div>
+          <div class="del-text">Acesso à comunidade de fisioterapeutas</div>
+        </div>
+        <div class="del-card">
+          <div class="del-check">✦</div>
+          <div class="del-text">Carta de posicionamento personalizada</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 17: TRANSFORMAÇÃO ==================== -->
+  <div class="slide" id="s17">
+    <svg class="botanical-svg" style="top:0;left:0;width:200px;opacity:0.1" viewBox="0 0 300 280" fill="none">
+      <path d="M20,260 Q60,180 140,120" stroke="white" stroke-width="1.5" fill="none"/>
+      <ellipse cx="80" cy="200" rx="22" ry="13" transform="rotate(-40,80,200)" fill="white"/>
+      <ellipse cx="108" cy="172" rx="20" ry="11" transform="rotate(-50,108,172)" fill="white"/>
+    </svg>
+    <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:50px 80px">
+      <div class="s17-label">A jornada completa</div>
+      <div class="s17-title">A transformação que acontece</div>
+      <div class="transform-cols">
+        <div class="before-col">
+          <div class="col-head">Antes da Mentoria</div>
+          <ul class="transform-list">
+            <li>Exaustão — trabalha muito, sobra pouco</li>
+            <li>Medo de cobrar mais e perder pacientes</li>
+            <li>Posta sem estratégia, sem retorno</li>
+            <li>Agenda desorganizada e imprevisível</li>
+            <li>Sem controle financeiro real</li>
+            <li>Invisível na sua cidade</li>
+          </ul>
+        </div>
+        <div class="arrow-divider">→</div>
+        <div class="after-col">
+          <div class="col-head">Depois da Mentoria</div>
+          <ul class="transform-list">
+            <li>Clareza total de quem é e o que oferece</li>
+            <li>Cobra premium com segurança e naturalidade</li>
+            <li>Conteúdo estratégico que atrai e converte</li>
+            <li>Agenda previsível e semana ideal estruturada</li>
+            <li>Lucro real e controle financeiro funcionando</li>
+            <li>Reconhecida como referência na cidade</li>
+          </ul>
+        </div>
+      </div>
+      <div class="transform-tagline">
+        "Você não compra conteúdo. Você compra <strong>direção, estrutura e segurança para crescer.</strong>"
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 18: INVESTIMENTO ==================== -->
+  <div class="slide" id="s18">
+    <svg class="botanical-svg" style="top:0;left:0;width:220px;opacity:0.08" viewBox="0 0 300 280" fill="none">
+      <path d="M20,260 Q60,180 140,120" stroke="#d3d8ad" stroke-width="1.5" fill="none"/>
+      <ellipse cx="80" cy="200" rx="22" ry="13" transform="rotate(-40,80,200)" fill="#95af71"/>
+      <ellipse cx="108" cy="172" rx="20" ry="11" transform="rotate(-50,108,172)" fill="#9d9d70"/>
+      <ellipse cx="130" cy="148" rx="18" ry="10" transform="rotate(-55,130,148)" fill="#95af71"/>
+    </svg>
+    <svg class="botanical-svg" style="bottom:0;right:0;width:220px;opacity:0.08;transform:rotate(180deg)" viewBox="0 0 300 280" fill="none">
+      <path d="M20,260 Q60,180 140,120" stroke="#d3d8ad" stroke-width="1.5" fill="none"/>
+      <ellipse cx="80" cy="200" rx="22" ry="13" transform="rotate(-40,80,200)" fill="#95af71"/>
+      <ellipse cx="108" cy="172" rx="20" ry="11" transform="rotate(-50,108,172)" fill="#9d9d70"/>
+    </svg>
+    <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:60px 80px">
+      <div class="inv-label">Investimento</div>
+      <div class="inv-title">Mentoria Plano FT</div>
+      <div class="inv-subtitle">4 meses de transformação estratégica</div>
+      <div class="inv-box">
+        <div class="inv-price-label">Investimento total</div>
+        <div class="inv-price">R$ [VALOR]</div>
+        <div class="inv-payment">
+          Ou em até [X]x de R$ [PARCELA]<br>
+          Pagamento via PIX, cartão ou boleto
+        </div>
+        <div class="inv-divider"></div>
+        <div class="inv-guarantee">
+          Vagas limitadas por turma para garantir acompanhamento personalizado
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 19: FAQ ==================== -->
+  <div class="slide" id="s19">
+    <svg class="botanical-svg" style="top:0;right:0;width:180px;opacity:0.07" viewBox="0 0 300 280" fill="none">
+      <path d="M20,260 Q60,180 140,120" stroke="#9d9d70" stroke-width="2" fill="none"/>
+      <ellipse cx="80" cy="200" rx="22" ry="13" transform="rotate(-40,80,200)" fill="#9d9d70"/>
+      <ellipse cx="108" cy="172" rx="20" ry="11" transform="rotate(-50,108,172)" fill="#95af71"/>
+    </svg>
+    <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:50px 80px">
+      <div class="faq-label">Dúvidas frequentes</div>
+      <div class="faq-title">Perguntas que você pode ter</div>
+      <div class="faq-grid">
+        <div class="faq-card">
+          <div class="faq-q">"Agora não é o momento certo..."</div>
+          <div class="faq-a">O momento nunca vai ser perfeito. Se você está sentindo que algo precisa mudar, esse é exatamente o sinal de que o momento é agora. A mentoria foi desenhada para caber na sua realidade atual.</div>
+        </div>
+        <div class="faq-card">
+          <div class="faq-q">"Acho que está caro para mim..."</div>
+          <div class="faq-a">A pergunta certa não é "quanto custa", mas "quanto me custa continuar onde estou?". A mentoria é um investimento direto no aumento do seu faturamento — não uma despesa.</div>
+        </div>
+        <div class="faq-card">
+          <div class="faq-q">"Minha realidade é diferente das outras..."</div>
+          <div class="faq-a">A mentoria é personalizada. O método é estruturado, mas cada encontro é adaptado à sua cidade, ao seu perfil e ao seu momento. Não existe uma solução genérica aqui.</div>
+        </div>
+        <div class="faq-card">
+          <div class="faq-q">"Tenho medo de não conseguir aplicar..."</div>
+          <div class="faq-a">Por isso cada encontro tem tarefas práticas e imediatas. O método foi desenhado para ação, não para teoria. Você vai sair de cada encontro sabendo exatamente o que fazer.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 20: CTA FINAL ==================== -->
+  <div class="slide" id="s20">
+    <!-- Large botanical elements -->
+    <svg class="botanical-svg" style="top:-20px;left:-20px;width:360px;opacity:0.1" viewBox="0 0 360 380" fill="none">
+      <path d="M30,360 Q80,260 180,180 Q240,130 300,80" stroke="#d3d8ad" stroke-width="2" fill="none"/>
+      <ellipse cx="100" cy="290" rx="30" ry="17" transform="rotate(-40,100,290)" fill="#d3d8ad"/>
+      <ellipse cx="135" cy="255" rx="28" ry="15" transform="rotate(-48,135,255)" fill="#95af71"/>
+      <ellipse cx="165" cy="225" rx="26" ry="14" transform="rotate(-54,165,225)" fill="#9d9d70"/>
+      <ellipse cx="192" cy="198" rx="24" ry="13" transform="rotate(-58,192,198)" fill="#d3d8ad"/>
+      <ellipse cx="75" cy="310" rx="22" ry="12" transform="rotate(-32,75,310)" fill="#95af71" opacity="0.7"/>
+      <path d="M10,340 Q60,250 150,190" stroke="#d3d8ad" stroke-width="1.2" fill="none" opacity="0.5"/>
+    </svg>
+    <svg class="botanical-svg" style="bottom:-20px;right:-20px;width:360px;opacity:0.1;transform:rotate(180deg)" viewBox="0 0 360 380" fill="none">
+      <path d="M30,360 Q80,260 180,180 Q240,130 300,80" stroke="#d3d8ad" stroke-width="2" fill="none"/>
+      <ellipse cx="100" cy="290" rx="30" ry="17" transform="rotate(-40,100,290)" fill="#d3d8ad"/>
+      <ellipse cx="135" cy="255" rx="28" ry="15" transform="rotate(-48,135,255)" fill="#95af71"/>
+      <ellipse cx="165" cy="225" rx="26" ry="14" transform="rotate(-54,165,225)" fill="#9d9d70"/>
+      <ellipse cx="192" cy="198" rx="24" ry="13" transform="rotate(-58,192,198)" fill="#d3d8ad"/>
+    </svg>
+    <svg class="botanical-svg" style="top:-20px;right:-20px;width:280px;opacity:0.08;transform:scaleX(-1)" viewBox="0 0 360 380" fill="none">
+      <path d="M30,360 Q80,260 180,180 Q240,130 300,80" stroke="#d3d8ad" stroke-width="2" fill="none"/>
+      <ellipse cx="100" cy="290" rx="30" ry="17" transform="rotate(-40,100,290)" fill="#d3d8ad"/>
+      <ellipse cx="135" cy="255" rx="28" ry="15" transform="rotate(-48,135,255)" fill="#95af71"/>
+    </svg>
+    <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:60px 80px">
+      <div class="cta-label">Pronta para dar o próximo passo?</div>
+      <div class="cta-main">
+        "Chegou a hora de estruturar<br><em>o que você já tem.</em>"
+      </div>
+      <div class="cta-sub">De fisioterapeuta invisível a referência lucrativa no particular</div>
+      <button class="cta-btn">QUERO MINHA VAGA</button>
+      <div class="cta-divider"></div>
+      <div class="cta-contact">
+        Fernanda Trindade · Fisioterapeuta Pediátrica &amp; Mentora<br>
+        [Seu Instagram] · [Seu WhatsApp] · [Seu e-mail]
+      </div>
+      <div style="height:20px"></div>
+      <div class="cta-brand">Mentoria Plano FT</div>
+    </div>
+  </div>
+
+</div><!-- end #presentation -->
+
+<!-- Navigation UI -->
+<div id="nav">
+  <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">
+    <svg width="10" height="14" viewBox="0 0 10 14" fill="none"><path d="M8,1 L2,7 L8,13" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <div id="dots"></div>
+  <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">
+    <svg width="10" height="14" viewBox="0 0 10 14" fill="none"><path d="M2,1 L8,7 L2,13" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <div id="counter">1 / 20</div>
+</div>
+
+<script>
+  const TOTAL = 20;
+  let current = 1;
+
+  // Build dots
+  const dotsEl = document.getElementById('dots');
+  for (let i = 1; i <= TOTAL; i++) {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 1 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotsEl.appendChild(d);
+  }
+
+  function goTo(n) {
+    if (n < 1 || n > TOTAL) return;
+    const prev = document.getElementById('s' + current);
+    if (prev) { prev.classList.remove('active'); }
+    current = n;
+    const next = document.getElementById('s' + current);
+    if (next) { next.classList.add('active'); }
+    document.getElementById('counter').textContent = current + ' / ' + TOTAL;
+    const dots = document.querySelectorAll('.dot');
+    dots.forEach((d, i) => d.classList.toggle('active', i + 1 === current));
+  }
+
+  function changeSlide(dir) { goTo(current + dir); }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
+  });
+
+  // Touch swipe support
+  let touchStartX = 0;
+  document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+  document.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 50) changeSlide(dx < 0 ? 1 : -1);
+  });
+</script>
+</body>
+</html>
