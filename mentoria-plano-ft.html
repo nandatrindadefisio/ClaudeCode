@@ -1428,6 +1428,81 @@
     position: absolute;
     pointer-events: none;
   }
+
+  /* ============================================
+     SLIDE 2 — PHOTO
+  ============================================ */
+  #s2 .photo-wrap {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  #s2 .photo-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+  #s2 .photo-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 40%;
+    background: linear-gradient(to top, rgba(29,47,85,0.85) 0%, transparent 100%);
+  }
+  #s2 .photo-caption {
+    position: absolute;
+    bottom: 32px;
+    left: 0; right: 0;
+    text-align: center;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+  }
+
+  /* ============================================
+     SLIDE 20 — PHOTO STRIP
+  ============================================ */
+  #s20 .photo-strip {
+    position: absolute;
+    top: 0; right: 0;
+    width: 38%;
+    height: 100%;
+    overflow: hidden;
+  }
+  #s20 .photo-strip img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    opacity: 0.35;
+  }
+  #s20 .photo-strip::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(to right, var(--navy) 0%, transparent 60%);
+  }
+  #s20 .cta-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 62%;
+    padding: 60px 80px;
+    text-align: left;
+  }
+  #s20 .cta-main { text-align: left; }
+  #s20 .cta-sub { text-align: left; }
+  #s20 .cta-contact { text-align: left; }
 </style>
 </head>
 <body>
@@ -1436,53 +1511,101 @@
 
   <!-- ==================== SLIDE 1: COVER ==================== -->
   <div class="slide active" id="s1">
-    <!-- Botanical TL -->
-    <svg class="botanical-svg" style="top:0;left:0;width:300px;opacity:0.15" viewBox="0 0 300 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20,260 Q60,180 140,120" stroke="#d3d8ad" stroke-width="1.5" fill="none"/>
-      <ellipse cx="80" cy="200" rx="22" ry="13" transform="rotate(-40,80,200)" fill="#95af71" opacity="0.6"/>
-      <ellipse cx="108" cy="172" rx="20" ry="11" transform="rotate(-50,108,172)" fill="#9d9d70" opacity="0.5"/>
-      <ellipse cx="130" cy="148" rx="18" ry="10" transform="rotate(-55,130,148)" fill="#95af71" opacity="0.4"/>
-      <ellipse cx="55" cy="220" rx="18" ry="10" transform="rotate(-30,55,220)" fill="#d3d8ad" opacity="0.4"/>
-      <path d="M5,240 Q40,190 90,160" stroke="#d3d8ad" stroke-width="1" fill="none" opacity="0.5"/>
-      <ellipse cx="50" cy="195" rx="16" ry="9" transform="rotate(-45,50,195)" fill="#95af71" opacity="0.3"/>
-    </svg>
-    <!-- Botanical BR -->
-    <svg class="botanical-svg" style="bottom:0;right:0;width:300px;opacity:0.15;transform:rotate(180deg)" viewBox="0 0 300 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20,260 Q60,180 140,120" stroke="#d3d8ad" stroke-width="1.5" fill="none"/>
-      <ellipse cx="80" cy="200" rx="22" ry="13" transform="rotate(-40,80,200)" fill="#95af71" opacity="0.6"/>
-      <ellipse cx="108" cy="172" rx="20" ry="11" transform="rotate(-50,108,172)" fill="#9d9d70" opacity="0.5"/>
-      <ellipse cx="130" cy="148" rx="18" ry="10" transform="rotate(-55,130,148)" fill="#95af71" opacity="0.4"/>
-      <ellipse cx="55" cy="220" rx="18" ry="10" transform="rotate(-30,55,220)" fill="#d3d8ad" opacity="0.4"/>
-    </svg>
-    <!-- Botanical TR -->
-    <svg class="botanical-svg" style="top:0;right:0;width:240px;opacity:0.12;transform:scaleX(-1)" viewBox="0 0 300 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20,260 Q60,180 140,120" stroke="#d3d8ad" stroke-width="1.5" fill="none"/>
-      <ellipse cx="80" cy="200" rx="22" ry="13" transform="rotate(-40,80,200)" fill="#95af71" opacity="0.6"/>
-      <ellipse cx="108" cy="172" rx="20" ry="11" transform="rotate(-50,108,172)" fill="#9d9d70" opacity="0.5"/>
-      <ellipse cx="130" cy="148" rx="18" ry="10" transform="rotate(-55,130,148)" fill="#95af71" opacity="0.4"/>
+    <!-- Botanical branch TL — fiel ao ícone da marca -->
+    <svg class="botanical-svg" style="top:-10px;left:-10px;width:320px;opacity:0.18" viewBox="0 0 110 310" fill="#d3d8ad" xmlns="http://www.w3.org/2000/svg">
+      <path d="M55,305 C54,265 56,225 55,185 C54,145 56,105 55,35" stroke="#d3d8ad" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M55,268 C30,261 14,245 18,228 C22,211 42,209 54,225 C57,231 56,251 55,265 Z"/>
+      <path d="M55,250 C80,243 96,227 92,210 C88,193 68,191 56,207 C53,213 54,233 55,247 Z"/>
+      <path d="M55,213 C30,206 14,190 18,173 C22,156 42,154 54,170 C57,176 56,196 55,210 Z"/>
+      <path d="M55,195 C80,188 96,172 92,155 C88,138 68,136 56,152 C53,158 54,178 55,192 Z"/>
+      <path d="M55,158 C30,151 14,135 18,118 C22,101 42,99 54,115 C57,121 56,141 55,155 Z"/>
+      <path d="M55,140 C80,133 96,117 92,100 C88,83 68,81 56,97 C53,103 54,123 55,137 Z"/>
+      <ellipse cx="55" cy="60" rx="26" ry="32"/>
     </svg>
 
-    <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%">
-      <div class="eyebrow">Fernanda Trindade</div>
-      <div class="main-title">
-        <span>MENTORIA</span>
-        PLANO FT
+    <!-- Botanical branch BR -->
+    <svg class="botanical-svg" style="bottom:-10px;right:-10px;width:320px;opacity:0.18;transform:rotate(180deg)" viewBox="0 0 110 310" fill="#95af71" xmlns="http://www.w3.org/2000/svg">
+      <path d="M55,305 C54,265 56,225 55,185 C54,145 56,105 55,35" stroke="#95af71" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M55,268 C30,261 14,245 18,228 C22,211 42,209 54,225 C57,231 56,251 55,265 Z"/>
+      <path d="M55,250 C80,243 96,227 92,210 C88,193 68,191 56,207 C53,213 54,233 55,247 Z"/>
+      <path d="M55,213 C30,206 14,190 18,173 C22,156 42,154 54,170 C57,176 56,196 55,210 Z"/>
+      <path d="M55,195 C80,188 96,172 92,155 C88,138 68,136 56,152 C53,158 54,178 55,192 Z"/>
+      <path d="M55,158 C30,151 14,135 18,118 C22,101 42,99 54,115 C57,121 56,141 55,155 Z"/>
+      <ellipse cx="55" cy="60" rx="26" ry="32"/>
+    </svg>
+
+    <!-- Botanical branch TR (espelhado) -->
+    <svg class="botanical-svg" style="top:-10px;right:-10px;width:260px;opacity:0.13;transform:scaleX(-1)" viewBox="0 0 110 310" fill="#9d9d70" xmlns="http://www.w3.org/2000/svg">
+      <path d="M55,305 C54,265 56,225 55,185 C54,145 56,105 55,35" stroke="#9d9d70" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M55,268 C30,261 14,245 18,228 C22,211 42,209 54,225 C57,231 56,251 55,265 Z"/>
+      <path d="M55,250 C80,243 96,227 92,210 C88,193 68,191 56,207 C53,213 54,233 55,247 Z"/>
+      <path d="M55,213 C30,206 14,190 18,173 C22,156 42,154 54,170 C57,176 56,196 55,210 Z"/>
+      <path d="M55,195 C80,188 96,172 92,155 C88,138 68,136 56,152 C53,158 54,178 55,192 Z"/>
+      <ellipse cx="55" cy="60" rx="26" ry="32"/>
+    </svg>
+
+    <div style="position:relative;z-index:1;display:flex;flex-direction:row;align-items:center;justify-content:center;width:100%;height:100%;gap:60px;padding:0 80px">
+
+      <!-- FT Logo SVG — fiel à identidade visual -->
+      <svg width="200" height="220" viewBox="0 0 280 300" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;opacity:0.92">
+        <!-- Oval frame fechado -->
+        <rect x="20" y="10" width="240" height="280" rx="120" ry="120" stroke="#d3d8ad" stroke-width="2" fill="none"/>
+        <!-- FT monogram -->
+        <text x="140" y="200" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="148" font-weight="400" fill="#d3d8ad">FT</text>
+        <!-- Florzinhas decorativas (canto inferior direito) -->
+        <g transform="translate(165,235)" opacity="0.8">
+          <path d="M0,30 Q10,20 22,18" stroke="#d3d8ad" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+          <path d="M5,24 Q15,12 28,8" stroke="#d3d8ad" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+          <!-- Flor 1 -->
+          <circle cx="22" cy="18" r="4" fill="#d3d8ad"/>
+          <circle cx="22" cy="18" r="2" fill="#1d2f55"/>
+          <!-- Flor 2 -->
+          <circle cx="28" cy="8" r="4" fill="#d3d8ad"/>
+          <circle cx="28" cy="8" r="2" fill="#1d2f55"/>
+          <!-- Folhinhas -->
+          <ellipse cx="15" cy="16" rx="5" ry="3" transform="rotate(-30 15 16)" fill="#d3d8ad" opacity="0.7"/>
+          <ellipse cx="20" cy="11" rx="5" ry="3" transform="rotate(-45 20 11)" fill="#d3d8ad" opacity="0.7"/>
+        </g>
+        <!-- "fisioterapeuta pediátrica" curvo no topo -->
+        <defs>
+          <path id="arcCover" d="M 55,148 A 86,86 0 0,1 225,148"/>
+        </defs>
+        <text font-family="'Nunito', sans-serif" font-size="12.5" fill="#d3d8ad" font-weight="300" letter-spacing="1.5" opacity="0.7">
+          <textPath href="#arcCover" startOffset="50%" text-anchor="middle">fisioterapeuta pediátrica</textPath>
+        </text>
+      </svg>
+
+      <!-- Texto central -->
+      <div style="display:flex;flex-direction:column;align-items:flex-start">
+        <div class="eyebrow" style="margin-bottom:4px">Fernanda Trindade</div>
+        <div class="main-title">
+          <span>MENTORIA</span>
+          PLANO FT
+        </div>
+        <div class="divider" style="margin:20px 0"></div>
+        <div class="tagline" style="text-align:left">De fisioterapeuta invisível a referência lucrativa no particular</div>
+        <div class="author" style="margin-top:10px">Fisioterapeuta Pediátrica &amp; Mentora de Negócios</div>
       </div>
-      <div class="divider"></div>
-      <div class="tagline">De fisioterapeuta invisível a referência lucrativa no particular</div>
-      <div class="author">Fisioterapeuta Pediátrica &amp; Mentora de Negócios</div>
     </div>
   </div>
 
   <!-- ==================== SLIDE 2: SOBRE FERNANDA ==================== -->
   <div class="slide" id="s2">
     <div class="left-col">
-      <!-- Botanical accent -->
-      <svg class="botanical-svg" style="bottom:20px;left:20px;width:180px;opacity:0.12" viewBox="0 0 200 300" fill="none">
-        <path d="M100,290 Q80,200 60,120 Q50,80 80,40" stroke="#9d9d70" stroke-width="1.5" fill="none"/>
-        <ellipse cx="70" cy="180" rx="24" ry="14" transform="rotate(-30,70,180)" fill="#95af71"/>
-        <ellipse cx="80" cy="150" rx="22" ry="12" transform="rotate(-40,80,150)" fill="#9d9d70"/>
-        <ellipse cx="85" cy="120" rx="20" ry="11" transform="rotate(-50,85,120)" fill="#95af71" opacity="0.7"/>
+      <!-- Botanical accent — fiel ao ícone da marca (verde-oliva) -->
+      <svg class="botanical-svg" style="bottom:-10px;left:-10px;width:200px;opacity:0.13" viewBox="0 0 110 310" fill="#9d9d70" xmlns="http://www.w3.org/2000/svg">
+        <path d="M55,305 C54,265 56,225 55,185 C54,145 56,105 55,35" stroke="#9d9d70" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M55,268 C30,261 14,245 18,228 C22,211 42,209 54,225 C57,231 56,251 55,265 Z"/>
+        <path d="M55,250 C80,243 96,227 92,210 C88,193 68,191 56,207 C53,213 54,233 55,247 Z"/>
+        <path d="M55,213 C30,206 14,190 18,173 C22,156 42,154 54,170 C57,176 56,196 55,210 Z"/>
+        <path d="M55,195 C80,188 96,172 92,155 C88,138 68,136 56,152 C53,158 54,178 55,192 Z"/>
+        <path d="M55,158 C30,151 14,135 18,118 C22,101 42,99 54,115 C57,121 56,141 55,155 Z"/>
+        <ellipse cx="55" cy="60" rx="26" ry="32"/>
+      </svg>
+      <!-- Logo FT pequeno no canto superior -->
+      <svg style="position:absolute;top:24px;right:24px;width:52px;opacity:0.12" viewBox="0 0 280 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="10" width="240" height="280" rx="120" stroke="#1d2f55" stroke-width="4" fill="none"/>
+        <text x="140" y="200" text-anchor="middle" font-family="'Cormorant Garamond',Georgia,serif" font-size="148" font-weight="400" fill="#1d2f55">FT</text>
       </svg>
       <div class="quem-e">Quem é</div>
       <div class="name">Fernanda<br>Trindade</div>
@@ -1494,34 +1617,32 @@
       </div>
     </div>
     <div class="right-col">
-      <svg class="botanical-svg" style="top:0;right:0;width:220px;opacity:0.08" viewBox="0 0 300 280" fill="none">
-        <path d="M20,260 Q60,180 140,120" stroke="#d3d8ad" stroke-width="2" fill="none"/>
-        <ellipse cx="80" cy="200" rx="22" ry="13" transform="rotate(-40,80,200)" fill="#95af71"/>
-        <ellipse cx="108" cy="172" rx="20" ry="11" transform="rotate(-50,108,172)" fill="#9d9d70"/>
-      </svg>
-      <div class="photo-placeholder">
-        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="24" cy="16" r="10" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none"/>
-          <path d="M6,44 C6,33 42,33 42,44" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none"/>
-        </svg>
-        <span>Sua foto aqui</span>
+      <div class="photo-wrap">
+        <img src="fernanda-1.jpg" alt="Fernanda Trindade" onerror="this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:rgba(255,255,255,0.3);font-family:var(--sans);font-size:11px;letter-spacing:2px;text-transform:uppercase\'><svg width=52 height=52 viewBox=\'0 0 52 52\' fill=\'none\'><circle cx=\'26\' cy=\'18\' r=\'11\' stroke=\'rgba(255,255,255,0.3)\' stroke-width=\'1.5\' fill=\'none\'/><path d=\'M5,48 C5,35 47,35 47,48\' stroke=\'rgba(255,255,255,0.3)\' stroke-width=\'1.5\' fill=\'none\'/></svg>Salve fernanda-1.jpg<br>na mesma pasta do HTML</div>'"/>
+        <div class="photo-overlay"></div>
+        <div class="photo-caption">Fernanda Trindade · fisioterapeuta pediátrica</div>
       </div>
     </div>
   </div>
 
   <!-- ==================== SLIDE 3: COMO SURGIU ==================== -->
   <div class="slide" id="s3">
-    <!-- Botanical elements -->
-    <svg class="botanical-svg" style="top:0;left:0;width:220px;opacity:0.12" viewBox="0 0 300 280" fill="none">
-      <path d="M20,260 Q60,180 140,120" stroke="white" stroke-width="1.5" fill="none"/>
-      <ellipse cx="80" cy="200" rx="22" ry="13" transform="rotate(-40,80,200)" fill="white"/>
-      <ellipse cx="108" cy="172" rx="20" ry="11" transform="rotate(-50,108,172)" fill="white"/>
-      <ellipse cx="130" cy="148" rx="18" ry="10" transform="rotate(-55,130,148)" fill="white" opacity="0.7"/>
+    <!-- Botanical branch TL -->
+    <svg class="botanical-svg" style="top:-10px;left:-10px;width:240px;opacity:0.15" viewBox="0 0 110 310" fill="white" xmlns="http://www.w3.org/2000/svg">
+      <path d="M55,305 C54,265 56,225 55,185 C54,145 56,105 55,35" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M55,268 C30,261 14,245 18,228 C22,211 42,209 54,225 C57,231 56,251 55,265 Z"/>
+      <path d="M55,250 C80,243 96,227 92,210 C88,193 68,191 56,207 C53,213 54,233 55,247 Z"/>
+      <path d="M55,213 C30,206 14,190 18,173 C22,156 42,154 54,170 C57,176 56,196 55,210 Z"/>
+      <path d="M55,195 C80,188 96,172 92,155 C88,138 68,136 56,152 C53,158 54,178 55,192 Z"/>
+      <ellipse cx="55" cy="60" rx="26" ry="32"/>
     </svg>
-    <svg class="botanical-svg" style="bottom:0;right:0;width:220px;opacity:0.12;transform:rotate(180deg)" viewBox="0 0 300 280" fill="none">
-      <path d="M20,260 Q60,180 140,120" stroke="white" stroke-width="1.5" fill="none"/>
-      <ellipse cx="80" cy="200" rx="22" ry="13" transform="rotate(-40,80,200)" fill="white"/>
-      <ellipse cx="108" cy="172" rx="20" ry="11" transform="rotate(-50,108,172)" fill="white"/>
+    <!-- Botanical branch BR -->
+    <svg class="botanical-svg" style="bottom:-10px;right:-10px;width:240px;opacity:0.15;transform:rotate(180deg)" viewBox="0 0 110 310" fill="white" xmlns="http://www.w3.org/2000/svg">
+      <path d="M55,305 C54,265 56,225 55,185 C54,145 56,105 55,35" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M55,268 C30,261 14,245 18,228 C22,211 42,209 54,225 C57,231 56,251 55,265 Z"/>
+      <path d="M55,250 C80,243 96,227 92,210 C88,193 68,191 56,207 C53,213 54,233 55,247 Z"/>
+      <path d="M55,213 C30,206 14,190 18,173 C22,156 42,154 54,170 C57,176 56,196 55,210 Z"/>
+      <ellipse cx="55" cy="60" rx="26" ry="32"/>
     </svg>
     <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:60px 80px">
       <div class="s3-label">A origem</div>
@@ -1548,16 +1669,22 @@
 
   <!-- ==================== SLIDE 4: A PROMESSA ==================== -->
   <div class="slide" id="s4">
-    <svg class="botanical-svg" style="top:20px;right:20px;width:200px;opacity:0.1" viewBox="0 0 240 300" fill="none">
-      <path d="M120,290 Q90,200 70,120 Q55,70 90,30" stroke="#9d9d70" stroke-width="1.5" fill="none"/>
-      <ellipse cx="85" cy="190" rx="26" ry="14" transform="rotate(-25,85,190)" fill="#9d9d70"/>
-      <ellipse cx="90" cy="155" rx="24" ry="13" transform="rotate(-35,90,155)" fill="#95af71"/>
-      <ellipse cx="92" cy="122" rx="22" ry="12" transform="rotate(-45,92,122)" fill="#9d9d70" opacity="0.7"/>
+    <!-- Folha brand icon direita — verde-oliva -->
+    <svg class="botanical-svg" style="top:-10px;right:-10px;width:200px;opacity:0.1" viewBox="0 0 110 310" fill="#9d9d70" xmlns="http://www.w3.org/2000/svg">
+      <path d="M55,305 C54,265 56,225 55,185 C54,145 56,105 55,35" stroke="#9d9d70" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M55,268 C30,261 14,245 18,228 C22,211 42,209 54,225 C57,231 56,251 55,265 Z"/>
+      <path d="M55,250 C80,243 96,227 92,210 C88,193 68,191 56,207 C53,213 54,233 55,247 Z"/>
+      <path d="M55,213 C30,206 14,190 18,173 C22,156 42,154 54,170 C57,176 56,196 55,210 Z"/>
+      <path d="M55,195 C80,188 96,172 92,155 C88,138 68,136 56,152 C53,158 54,178 55,192 Z"/>
+      <ellipse cx="55" cy="60" rx="26" ry="32"/>
     </svg>
-    <svg class="botanical-svg" style="bottom:20px;left:20px;width:200px;opacity:0.1;transform:rotate(180deg) scaleX(-1)" viewBox="0 0 240 300" fill="none">
-      <path d="M120,290 Q90,200 70,120 Q55,70 90,30" stroke="#9d9d70" stroke-width="1.5" fill="none"/>
-      <ellipse cx="85" cy="190" rx="26" ry="14" transform="rotate(-25,85,190)" fill="#9d9d70"/>
-      <ellipse cx="90" cy="155" rx="24" ry="13" transform="rotate(-35,90,155)" fill="#95af71"/>
+    <!-- Folha brand icon esquerda — terracota -->
+    <svg class="botanical-svg" style="bottom:-10px;left:-10px;width:200px;opacity:0.1;transform:rotate(180deg) scaleX(-1)" viewBox="0 0 110 310" fill="#bd7f68" xmlns="http://www.w3.org/2000/svg">
+      <path d="M55,305 C54,265 56,225 55,185 C54,145 56,105 55,35" stroke="#bd7f68" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M55,268 C30,261 14,245 18,228 C22,211 42,209 54,225 C57,231 56,251 55,265 Z"/>
+      <path d="M55,250 C80,243 96,227 92,210 C88,193 68,191 56,207 C53,213 54,233 55,247 Z"/>
+      <path d="M55,213 C30,206 14,190 18,173 C22,156 42,154 54,170 C57,176 56,196 55,210 Z"/>
+      <ellipse cx="55" cy="60" rx="26" ry="32"/>
     </svg>
     <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:60px 80px;text-align:center">
       <div class="promise-label">A promessa da mentoria</div>
@@ -2170,41 +2297,42 @@
 
   <!-- ==================== SLIDE 20: CTA FINAL ==================== -->
   <div class="slide" id="s20">
-    <!-- Large botanical elements -->
-    <svg class="botanical-svg" style="top:-20px;left:-20px;width:360px;opacity:0.1" viewBox="0 0 360 380" fill="none">
-      <path d="M30,360 Q80,260 180,180 Q240,130 300,80" stroke="#d3d8ad" stroke-width="2" fill="none"/>
-      <ellipse cx="100" cy="290" rx="30" ry="17" transform="rotate(-40,100,290)" fill="#d3d8ad"/>
-      <ellipse cx="135" cy="255" rx="28" ry="15" transform="rotate(-48,135,255)" fill="#95af71"/>
-      <ellipse cx="165" cy="225" rx="26" ry="14" transform="rotate(-54,165,225)" fill="#9d9d70"/>
-      <ellipse cx="192" cy="198" rx="24" ry="13" transform="rotate(-58,192,198)" fill="#d3d8ad"/>
-      <ellipse cx="75" cy="310" rx="22" ry="12" transform="rotate(-32,75,310)" fill="#95af71" opacity="0.7"/>
-      <path d="M10,340 Q60,250 150,190" stroke="#d3d8ad" stroke-width="1.2" fill="none" opacity="0.5"/>
+    <!-- Foto de fundo lado direito -->
+    <div class="photo-strip">
+      <img src="fernanda-2.jpg" alt="Fernanda Trindade" onerror="this.style.display='none'"/>
+    </div>
+
+    <!-- Botanical branch BL -->
+    <svg class="botanical-svg" style="bottom:-10px;left:-10px;width:300px;opacity:0.12" viewBox="0 0 110 310" fill="#d3d8ad" xmlns="http://www.w3.org/2000/svg">
+      <path d="M55,305 C54,265 56,225 55,185 C54,145 56,105 55,35" stroke="#d3d8ad" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M55,268 C30,261 14,245 18,228 C22,211 42,209 54,225 C57,231 56,251 55,265 Z"/>
+      <path d="M55,250 C80,243 96,227 92,210 C88,193 68,191 56,207 C53,213 54,233 55,247 Z"/>
+      <path d="M55,213 C30,206 14,190 18,173 C22,156 42,154 54,170 C57,176 56,196 55,210 Z"/>
+      <path d="M55,195 C80,188 96,172 92,155 C88,138 68,136 56,152 C53,158 54,178 55,192 Z"/>
+      <path d="M55,158 C30,151 14,135 18,118 C22,101 42,99 54,115 C57,121 56,141 55,155 Z"/>
+      <ellipse cx="55" cy="60" rx="26" ry="32"/>
     </svg>
-    <svg class="botanical-svg" style="bottom:-20px;right:-20px;width:360px;opacity:0.1;transform:rotate(180deg)" viewBox="0 0 360 380" fill="none">
-      <path d="M30,360 Q80,260 180,180 Q240,130 300,80" stroke="#d3d8ad" stroke-width="2" fill="none"/>
-      <ellipse cx="100" cy="290" rx="30" ry="17" transform="rotate(-40,100,290)" fill="#d3d8ad"/>
-      <ellipse cx="135" cy="255" rx="28" ry="15" transform="rotate(-48,135,255)" fill="#95af71"/>
-      <ellipse cx="165" cy="225" rx="26" ry="14" transform="rotate(-54,165,225)" fill="#9d9d70"/>
-      <ellipse cx="192" cy="198" rx="24" ry="13" transform="rotate(-58,192,198)" fill="#d3d8ad"/>
-    </svg>
-    <svg class="botanical-svg" style="top:-20px;right:-20px;width:280px;opacity:0.08;transform:scaleX(-1)" viewBox="0 0 360 380" fill="none">
-      <path d="M30,360 Q80,260 180,180 Q240,130 300,80" stroke="#d3d8ad" stroke-width="2" fill="none"/>
-      <ellipse cx="100" cy="290" rx="30" ry="17" transform="rotate(-40,100,290)" fill="#d3d8ad"/>
-      <ellipse cx="135" cy="255" rx="28" ry="15" transform="rotate(-48,135,255)" fill="#95af71"/>
-    </svg>
-    <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:60px 80px">
+
+    <!-- Conteúdo CTA -->
+    <div class="cta-content">
+      <!-- FT Logo pequeno -->
+      <svg width="56" height="62" viewBox="0 0 280 300" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:28px;opacity:0.4">
+        <rect x="20" y="10" width="240" height="280" rx="120" stroke="#d3d8ad" stroke-width="4" fill="none"/>
+        <text x="140" y="200" text-anchor="middle" font-family="'Cormorant Garamond',Georgia,serif" font-size="148" font-weight="400" fill="#d3d8ad">FT</text>
+      </svg>
+
       <div class="cta-label">Pronta para dar o próximo passo?</div>
       <div class="cta-main">
-        "Chegou a hora de estruturar<br><em>o que você já tem.</em>"
+        "Chegou a hora de<br>estruturar <em>o que<br>você já tem.</em>"
       </div>
-      <div class="cta-sub">De fisioterapeuta invisível a referência lucrativa no particular</div>
-      <button class="cta-btn">QUERO MINHA VAGA</button>
-      <div class="cta-divider"></div>
+      <div class="cta-sub" style="margin-top:16px">De fisioterapeuta invisível a referência lucrativa no particular</div>
+      <button class="cta-btn" style="margin-top:36px;margin-bottom:32px">QUERO MINHA VAGA</button>
+      <div class="cta-divider" style="margin:0 0 20px 0"></div>
       <div class="cta-contact">
         Fernanda Trindade · Fisioterapeuta Pediátrica &amp; Mentora<br>
         [Seu Instagram] · [Seu WhatsApp] · [Seu e-mail]
       </div>
-      <div style="height:20px"></div>
+      <div style="height:16px"></div>
       <div class="cta-brand">Mentoria Plano FT</div>
     </div>
   </div>
