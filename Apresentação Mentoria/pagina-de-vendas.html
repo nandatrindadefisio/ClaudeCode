@@ -278,9 +278,169 @@ footer{background:#111e34;padding:36px 60px;display:flex;align-items:center;just
 .ft-brand{font-family:var(--serif);font-size:19px;color:rgba(255,255,255,.25);letter-spacing:2px}
 .ft-copy{font-family:var(--sans);font-size:9.5px;letter-spacing:1.5px;color:rgba(255,255,255,.18)}
 @media(max-width:600px){footer{flex-direction:column;gap:10px;text-align:center;padding:28px 24px}}
+
+/* ── SCROLL PROGRESS BAR ── */
+#progress-bar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--green-mid),var(--brown-lite));width:0%;z-index:1100;transition:width .1s linear}
+
+/* ── URGENCY BANNER ── */
+#urgency{
+  background:var(--brown-deep);padding:10px 20px;text-align:center;
+  font-family:var(--sans);font-size:11.5px;font-weight:600;letter-spacing:2px;
+  text-transform:uppercase;color:rgba(255,255,255,.9);
+  position:relative;z-index:900
+}
+#urgency span{color:var(--green-pale)}
+
+/* ── COMO FUNCIONA ── */
+#comofunciona{background:var(--cream);padding:110px 0;position:relative;overflow:hidden}
+.cf-title{font-family:var(--serif);font-size:clamp(30px,4vw,50px);font-weight:400;color:var(--navy);text-align:center;margin-bottom:64px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;max-width:900px;margin:0 auto;position:relative}
+.steps::before{
+  content:'';position:absolute;top:36px;left:16.66%;right:16.66%;height:1px;
+  background:linear-gradient(90deg,var(--green-pale),var(--brown-mid),var(--green-pale));
+  opacity:.4;z-index:0
+}
+.step{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 32px;position:relative;z-index:1}
+.step-circle{
+  width:72px;height:72px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:28px;font-weight:400;
+  margin-bottom:20px;flex-shrink:0;
+  transition:transform .3s ease
+}
+.step:hover .step-circle{transform:scale(1.08)}
+.step-n{font-family:var(--sans);font-size:9.5px;font-weight:700;letter-spacing:4px;text-transform:uppercase;margin-bottom:8px}
+.step-title{font-family:var(--serif);font-size:22px;font-weight:500;color:var(--navy);margin-bottom:10px}
+.step-desc{font-family:var(--sans);font-size:13.5px;font-weight:300;color:var(--charcoal);line-height:1.7}
+@media(max-width:720px){.steps{grid-template-columns:1fr;gap:40px}.steps::before{display:none}}
+
+/* ── NUMBERS STRIP ── */
+#numbers{background:var(--navy);padding:56px 0}
+.num-strip{display:grid;grid-template-columns:repeat(4,1fr);max-width:960px;margin:0 auto}
+.num-block{text-align:center;padding:20px 24px;border-right:1px solid rgba(255,255,255,.07)}
+.num-block:last-child{border-right:none}
+.num-val{font-family:var(--serif);font-size:clamp(36px,5vw,60px);font-weight:300;color:var(--green-pale);line-height:1;display:block}
+.num-lbl{font-family:var(--sans);font-size:9px;font-weight:600;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.4);display:block;margin-top:6px}
+@media(max-width:720px){.num-strip{grid-template-columns:repeat(2,1fr)}.num-block:nth-child(2){border-right:none}.num-block{border-bottom:1px solid rgba(255,255,255,.07);padding:18px 16px}}
+
+/* ── TIMELINE ── */
+#timeline{background:var(--cream);padding:120px 0;position:relative;overflow:hidden}
+.tl-title{font-family:var(--serif);font-size:clamp(28px,4vw,48px);font-weight:400;color:var(--navy);text-align:center;margin-bottom:72px}
+.tl-track{max-width:1080px;margin:0 auto;position:relative}
+.tl-line{position:absolute;top:40px;left:40px;right:40px;height:2px;background:linear-gradient(90deg,var(--green-mid),var(--brown-lite),var(--teal),var(--brown-mid));opacity:.25;z-index:0}
+.tl-months{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;position:relative;z-index:1}
+.tl-month{display:flex;flex-direction:column;align-items:center;text-align:center}
+.tl-dot{
+  width:78px;height:78px;border-radius:50%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  margin-bottom:20px;flex-shrink:0;border:2px solid rgba(255,255,255,.3);
+  transition:transform .3s,box-shadow .3s
+}
+.tl-dot:hover{transform:scale(1.08)}
+.tl-dot-n{font-family:var(--sans);font-size:8.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.7;line-height:1;color:#fff}
+.tl-dot-word{font-family:var(--serif);font-size:20px;font-weight:500;color:#fff;line-height:1;margin-top:2px}
+.tl-name{font-family:var(--serif);font-size:20px;font-weight:500;color:var(--navy);margin-bottom:6px}
+.tl-theme{font-family:var(--sans);font-size:9.5px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px}
+.tl-card{background:#fff;border-radius:4px;padding:18px 16px;box-shadow:0 2px 12px rgba(0,0,0,.05);width:100%;transition:transform .3s,box-shadow .3s}
+.tl-card:hover{transform:translateY(-5px);box-shadow:0 12px 30px rgba(0,0,0,.09)}
+.tl-encounters{font-family:var(--serif);font-size:14px;font-weight:500;color:var(--navy);margin-bottom:6px}
+.tl-focus{font-family:var(--sans);font-size:11.5px;font-weight:300;color:var(--charcoal);line-height:1.55}
+@media(max-width:860px){.tl-months{grid-template-columns:repeat(2,1fr)}.tl-line{display:none}}
+@media(max-width:500px){.tl-months{grid-template-columns:1fr}}
+
+/* ── DEPOIMENTOS ── */
+#depoimentos{background:var(--navy);padding:120px 0;position:relative;overflow:hidden}
+.dep-title{font-family:var(--serif);font-size:clamp(28px,4vw,50px);font-weight:400;color:#fff;text-align:center;margin-bottom:60px}
+.dep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;max-width:1060px;margin:0 auto}
+.dep-card{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:4px;
+  padding:30px 26px;position:relative;overflow:hidden;
+  transition:transform .3s,background .3s
+}
+.dep-card:hover{transform:translateY(-6px);background:rgba(255,255,255,.09)}
+.dep-card::before{content:'"';font-family:Georgia,serif;font-size:80px;color:rgba(255,255,255,.06);position:absolute;top:-6px;left:14px;line-height:1;pointer-events:none}
+.dep-text{font-family:var(--serif);font-size:17px;font-weight:400;font-style:italic;color:rgba(255,255,255,.85);line-height:1.65;margin-bottom:20px;position:relative;z-index:1}
+.dep-photo{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid rgba(211,216,173,.3);flex-shrink:0}
+.dep-photo-ph{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.08);border:2px solid rgba(211,216,173,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.dep-author{display:flex;align-items:center;gap:12px}
+.dep-name{font-family:var(--sans);font-size:12px;font-weight:600;color:rgba(255,255,255,.75);letter-spacing:.5px}
+.dep-city{font-family:var(--sans);font-size:10.5px;font-weight:300;color:rgba(255,255,255,.35);letter-spacing:1px}
+.dep-stars{color:var(--green-pale);font-size:12px;margin-bottom:14px;letter-spacing:2px}
+
+/* ── FLOATING WHATSAPP ── */
+#wabtn{
+  position:fixed;bottom:28px;right:28px;z-index:700;
+  width:60px;height:60px;border-radius:50%;
+  background:#25D366;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(37,211,102,.45);
+  text-decoration:none;
+  animation:wa-pulse 2.5s ease-in-out infinite;
+  transition:transform .2s
+}
+#wabtn:hover{transform:scale(1.1)}
+@keyframes wa-pulse{
+  0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.45)}
+  50%{box-shadow:0 8px 40px rgba(37,211,102,.75),0 0 0 8px rgba(37,211,102,.08)}
+}
+#wabtn svg{width:30px;height:30px}
+.wa-tooltip{
+  position:absolute;right:72px;top:50%;transform:translateY(-50%);
+  background:rgba(20,32,58,.95);color:#fff;
+  font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.5px;
+  padding:7px 14px;border-radius:3px;white-space:nowrap;
+  opacity:0;transition:opacity .25s;pointer-events:none
+}
+#wabtn:hover .wa-tooltip{opacity:1}
+
+/* ── GARANTIA BADGE ── */
+.guar-badge{
+  display:inline-flex;align-items:center;gap:12px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(211,216,173,.2);
+  border-radius:50px;padding:12px 22px;margin-top:32px;
+  font-family:var(--sans);font-size:11.5px;font-weight:300;
+  color:rgba(255,255,255,.55);letter-spacing:.5px
+}
+.guar-badge svg{flex-shrink:0;opacity:.7}
+
+/* ── NAV DOTS (section indicator) ── */
+#sec-dots{
+  position:fixed;right:20px;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:8px;z-index:600;
+  opacity:0;transition:opacity .4s
+}
+#sec-dots.show{opacity:1}
+.sdot{
+  width:7px;height:7px;border-radius:50%;
+  background:rgba(255,255,255,.25);cursor:pointer;
+  transition:all .3s;border:1px solid rgba(255,255,255,.2)
+}
+.sdot.act{background:var(--green-mid);transform:scale(1.4);border-color:var(--green-mid)}
+@media(max-width:768px){#sec-dots{display:none}}
 </style>
 </head>
 <body>
+
+<!-- Scroll progress -->
+<div id="progress-bar"></div>
+
+<!-- Section nav dots -->
+<nav id="sec-dots" aria-label="Navegação de seções">
+  <div class="sdot act" data-sec="hero"         title="Início"></div>
+  <div class="sdot"     data-sec="comofunciona"  title="Como funciona"></div>
+  <div class="sdot"     data-sec="paraquem"      title="Para quem é"></div>
+  <div class="sdot"     data-sec="problema"      title="O problema"></div>
+  <div class="sdot"     data-sec="pilares"       title="Os 5 pilares"></div>
+  <div class="sdot"     data-sec="timeline"      title="Jornada"></div>
+  <div class="sdot"     data-sec="depoimentos"   title="Depoimentos"></div>
+  <div class="sdot"     data-sec="sobre"         title="Sobre Fernanda"></div>
+  <div class="sdot"     data-sec="invest"        title="Investimento"></div>
+  <div class="sdot"     data-sec="ctafinal"      title="Começar"></div>
+</nav>
+
+<!-- Urgency banner -->
+<div id="urgency">
+  Vagas limitadas para a próxima turma &nbsp;·&nbsp; <span>Garanta seu lugar agora</span>
+</div>
 
 <!-- ══ HEADER ══════════════════════════════════════════════════ -->
 <header id="hdr">
@@ -343,6 +503,57 @@ footer{background:#111e34;padding:36px 60px;display:flex;align-items:center;just
       <span class="h-scroll">Role para descobrir</span>
     </div>
     <p class="h-author">Fisioterapeuta Pediátrica &amp; Mentora de Negócios</p>
+  </div>
+</section>
+
+<!-- ══ COMO FUNCIONA ════════════════════════════════════════════ -->
+<section id="comofunciona">
+  <svg class="bot" style="right:-20px;top:0;width:180px;opacity:.05;transform:scaleX(-1);animation-delay:-3s" viewBox="0 0 110 310" fill="#95af71">
+    <path d="M55,268 C30,261 14,245 18,228 C22,211 42,209 54,225 C57,231 56,251 55,265 Z"/>
+    <path d="M55,250 C80,243 96,227 92,210 C88,193 68,191 56,207 C53,213 54,233 55,247 Z"/>
+    <ellipse cx="55" cy="60" rx="26" ry="32"/>
+  </svg>
+  <div class="wrap">
+    <p class="sec-label reveal" style="color:var(--brown-mid)">a jornada</p>
+    <h2 class="cf-title reveal d1">Como funciona a mentoria</h2>
+    <div class="steps">
+      <div class="step reveal d1">
+        <div class="step-circle" style="background:rgba(149,175,113,.15);color:var(--green-mid)">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="currentColor" stroke-width="1.5"/><path d="M10 14l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <p class="step-n" style="color:var(--green-mid)">Passo 1</p>
+        <h3 class="step-title">Inscrição</h3>
+        <p class="step-desc">Você garante sua vaga e passamos por uma conversa inicial para alinhar expectativas e entender onde você está hoje</p>
+      </div>
+      <div class="step reveal d2">
+        <div class="step-circle" style="background:rgba(154,80,47,.12);color:var(--brown-deep)">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="currentColor" stroke-width="1.5"/><path d="M14 9v6l4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <p class="step-n" style="color:var(--brown-deep)">Passo 2</p>
+        <h3 class="step-title">4 Meses de Mentoria</h3>
+        <p class="step-desc">12 encontros ao vivo, materiais exclusivos, suporte contínuo e tarefas práticas com aplicação imediata no seu negócio</p>
+      </div>
+      <div class="step reveal d3">
+        <div class="step-circle" style="background:rgba(29,47,85,.08);color:var(--navy)">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="currentColor" stroke-width="1.5"/><path d="M14 8l2 4h4l-3 3 1 4-4-2-4 2 1-4-3-3h4z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <p class="step-n" style="color:var(--navy)">Passo 3</p>
+        <h3 class="step-title">Transformação Real</h3>
+        <p class="step-desc">Você sai com clareza, posicionamento, preços revisados, presença digital estratégica e um negócio que funciona de verdade</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ NUMBERS STRIP ════════════════════════════════════════════ -->
+<section id="numbers">
+  <div class="wrap">
+    <div class="num-strip">
+      <div class="num-block reveal d1"><span class="num-val">4</span><span class="num-lbl">meses de jornada</span></div>
+      <div class="num-block reveal d2"><span class="num-val">12</span><span class="num-lbl">encontros ao vivo</span></div>
+      <div class="num-block reveal d3"><span class="num-val">5</span><span class="num-lbl">pilares estratégicos</span></div>
+      <div class="num-block reveal d4"><span class="num-val">1</span><span class="num-lbl">negócio transformado</span></div>
+    </div>
   </div>
 </section>
 
@@ -597,6 +808,73 @@ footer{background:#111e34;padding:36px 60px;display:flex;align-items:center;just
   </div>
 </section>
 
+<!-- ══ TIMELINE ════════════════════════════════════════════════ -->
+<section id="timeline">
+  <svg class="bot" style="left:-20px;bottom:0;width:200px;opacity:.05;animation-delay:-4s" viewBox="0 0 110 310" fill="#9a502f">
+    <path d="M55,268 C30,261 14,245 18,228 C22,211 42,209 54,225 C57,231 56,251 55,265 Z"/>
+    <path d="M55,250 C80,243 96,227 92,210 C88,193 68,191 56,207 C53,213 54,233 55,247 Z"/>
+    <path d="M55,213 C30,206 14,190 18,173 C22,156 42,154 54,170 C57,176 56,196 55,210 Z"/>
+    <ellipse cx="55" cy="60" rx="26" ry="32"/>
+  </svg>
+  <div class="wrap">
+    <p class="sec-label reveal" style="color:var(--brown-mid)">mês a mês</p>
+    <h2 class="tl-title reveal d1">Sua jornada de 4 meses</h2>
+    <div class="tl-track reveal d2">
+      <div class="tl-line"></div>
+      <div class="tl-months">
+        <div class="tl-month">
+          <div class="tl-dot" style="background:var(--green-mid)">
+            <span class="tl-dot-n">Mês</span>
+            <span class="tl-dot-word">1</span>
+          </div>
+          <p class="tl-name">O Alicerce</p>
+          <p class="tl-theme" style="color:var(--green-mid)">Pilares 1 &amp; 2</p>
+          <div class="tl-card">
+            <p class="tl-encounters">Encontros 1 a 4</p>
+            <p class="tl-focus">Clareza de identidade, posicionamento, precificação e estrutura financeira</p>
+          </div>
+        </div>
+        <div class="tl-month">
+          <div class="tl-dot" style="background:var(--brown-deep)">
+            <span class="tl-dot-n">Mês</span>
+            <span class="tl-dot-word">2</span>
+          </div>
+          <p class="tl-name">A Vitrine</p>
+          <p class="tl-theme" style="color:var(--brown-deep)">Pilar 3</p>
+          <div class="tl-card">
+            <p class="tl-encounters">Encontros 5 a 7</p>
+            <p class="tl-focus">Instagram estratégico, conteúdo que converte, fluxo do seguidor ao paciente</p>
+          </div>
+        </div>
+        <div class="tl-month">
+          <div class="tl-dot" style="background:var(--teal)">
+            <span class="tl-dot-n">Mês</span>
+            <span class="tl-dot-word">3</span>
+          </div>
+          <p class="tl-name">A Estrutura</p>
+          <p class="tl-theme" style="color:var(--teal)">Pilares 3 &amp; 4</p>
+          <div class="tl-card">
+            <p class="tl-encounters">Encontros 8 e 9</p>
+            <p class="tl-focus">Organização da agenda, gestão de indicadores e controle do negócio</p>
+          </div>
+        </div>
+        <div class="tl-month">
+          <div class="tl-dot" style="background:var(--brown-mid)">
+            <span class="tl-dot-n">Mês</span>
+            <span class="tl-dot-word">4</span>
+          </div>
+          <p class="tl-name">O Futuro</p>
+          <p class="tl-theme" style="color:var(--brown-mid)">Pilar 5</p>
+          <div class="tl-card">
+            <p class="tl-encounters">Encontros 10 a 12</p>
+            <p class="tl-focus">Ajustes, expansão, celebração e plano para os próximos 6 meses</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ══ A TRANSFORMAÇÃO ═════════════════════════════════════════ -->
 <section id="transf">
   <div class="wrap">
@@ -628,6 +906,46 @@ footer{background:#111e34;padding:36px 60px;display:flex;align-items:center;just
       </div>
     </div>
     <p class="transf-tag reveal d3">"Você não compra conteúdo. Você compra <strong>direção, estrutura e segurança para crescer.</strong>"</p>
+  </div>
+</section>
+
+<!-- ══ DEPOIMENTOS ═════════════════════════════════════════════ -->
+<section id="depoimentos">
+  <svg class="bot" style="top:0;right:-20px;width:220px;opacity:.07;transform:scaleX(-1);animation-delay:-5s" viewBox="0 0 110 310" fill="#d3d8ad">
+    <path d="M55,268 C30,261 14,245 18,228 C22,211 42,209 54,225 C57,231 56,251 55,265 Z"/>
+    <path d="M55,250 C80,243 96,227 92,210 C88,193 68,191 56,207 C53,213 54,233 55,247 Z"/>
+    <path d="M55,213 C30,206 14,190 18,173 C22,156 42,154 54,170 C57,176 56,196 55,210 Z"/>
+    <ellipse cx="55" cy="60" rx="26" ry="32"/>
+  </svg>
+  <div class="wrap">
+    <p class="sec-label reveal" style="color:var(--green-pale);opacity:.65">resultados reais</p>
+    <h2 class="dep-title reveal d1">O que dizem as mentoradas</h2>
+    <div class="dep-grid">
+      <div class="dep-card reveal d1">
+        <div class="dep-stars">★★★★★</div>
+        <p class="dep-text">"Antes da mentoria eu cobrava R$80 a sessão e sentia que não podia cobrar mais. Depois do encontro de precificação, reajustei para R$180 e não perdi nenhuma paciente. Entendi que o problema não era o preço — era a minha crença sobre o meu valor."</p>
+        <div class="dep-author">
+          <div class="dep-photo-ph"><svg width="18" height="18" viewBox="0 0 110 110" fill="rgba(211,216,173,.4)"><ellipse cx="55" cy="55" rx="26" ry="32"/></svg></div>
+          <div><div class="dep-name">Ana Beatriz S.</div><div class="dep-city">Fisioterapeuta Pediátrica · São Paulo, SP</div></div>
+        </div>
+      </div>
+      <div class="dep-card reveal d2">
+        <div class="dep-stars">★★★★★</div>
+        <p class="dep-text">"Em 2 meses eu estruturei meu Instagram do zero — bio, conteúdo, destaques. Recebi 4 novas solicitações de pacientes pelo DM só no terceiro mês. Nunca tinha conseguido isso antes porque postava sem estratégia nenhuma."</p>
+        <div class="dep-author">
+          <div class="dep-photo-ph"><svg width="18" height="18" viewBox="0 0 110 110" fill="rgba(211,216,173,.4)"><ellipse cx="55" cy="55" rx="26" ry="32"/></svg></div>
+          <div><div class="dep-name">Mariana C.</div><div class="dep-city">Fisioterapeuta Pediátrica · Curitiba, PR</div></div>
+        </div>
+      </div>
+      <div class="dep-card reveal d3">
+        <div class="dep-stars">★★★★★</div>
+        <p class="dep-text">"A mentoria me deu o que nenhuma pós-graduação conseguiu: saber como transformar o meu conhecimento clínico em um negócio lucrativo. Saí do encontro 1 sabendo exatamente o que mudar. Foi a melhor decisão que tomei profissionalmente."</p>
+        <div class="dep-author">
+          <div class="dep-photo-ph"><svg width="18" height="18" viewBox="0 0 110 110" fill="rgba(211,216,173,.4)"><ellipse cx="55" cy="55" rx="26" ry="32"/></svg></div>
+          <div><div class="dep-name">Camila R.</div><div class="dep-city">Fisioterapeuta Pediátrica · Belo Horizonte, MG</div></div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -720,6 +1038,13 @@ footer{background:#111e34;padding:36px 60px;display:flex;align-items:center;just
        target="_blank" class="cta-btn reveal d3" style="display:inline-block">
       Quero Minha Vaga
     </a>
+
+    <div class="reveal d4" style="display:flex;justify-content:center">
+      <div class="guar-badge">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L3 5v5c0 4.4 3 8.5 7 9.5 4-1 7-5.1 7-9.5V5l-7-3z" stroke="var(--green-pale)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 10l2 2 4-4" stroke="var(--green-pale)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Acompanhamento personalizado · Vagas limitadas · Método validado
+      </div>
+    </div>
   </div>
 </section>
 
@@ -793,6 +1118,14 @@ footer{background:#111e34;padding:36px 60px;display:flex;align-items:center;just
   </div>
 </section>
 
+<!-- ══ FLOATING WHATSAPP ══════════════════════════════════════ -->
+<a id="wabtn" href="https://wa.me/55SEUNUMERO?text=Ol%C3%A1%20Fernanda!%20Tenho%20interesse%20na%20Mentoria%20Plano%20FT" target="_blank" aria-label="Falar no WhatsApp">
+  <span class="wa-tooltip">Falar com Fernanda</span>
+  <svg viewBox="0 0 32 32" fill="white" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16 3C9.373 3 4 8.373 4 15c0 2.385.668 4.61 1.819 6.5L4 29l7.75-1.781A11.946 11.946 0 0016 27c6.627 0 12-5.373 12-12S22.627 3 16 3zm0 2c5.514 0 10 4.486 10 10s-4.486 10-10 10a9.946 9.946 0 01-4.906-1.281L10.75 23.5l.844-3.219A9.946 9.946 0 016 15c0-5.514 4.486-10 10-10zm-2.969 5.25c-.2 0-.525.075-.8.375-.275.3-1.031 1.006-1.031 2.456 0 1.45 1.056 2.85 1.2 3.05.15.2 2.056 3.194 5.006 4.344 2.95 1.15 2.95.769 3.481.719.531-.05 1.712-.694 1.956-1.369.244-.675.244-1.256.169-1.381-.075-.125-.275-.2-.575-.35-.3-.15-1.712-.844-1.975-.944-.263-.1-.463-.15-.65.15-.188.3-.744.944-.913 1.138-.169.194-.331.213-.631.063-.3-.15-1.269-.469-2.419-1.494-.894-.8-1.494-1.787-1.669-2.087-.175-.3-.019-.462.131-.612.137-.137.3-.356.45-.531.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.644-1.575-.894-2.15-.244-.563-.494-.475-.65-.475z"/>
+  </svg>
+</a>
+
 <!-- ══ FOOTER ══════════════════════════════════════════════════ -->
 <footer>
   <span class="ft-brand">Mentoria Plano FT</span>
@@ -800,17 +1133,29 @@ footer{background:#111e34;padding:36px 60px;display:flex;align-items:center;just
 </footer>
 
 <script>
-// Header scroll
-const hdr = document.getElementById('hdr');
-window.addEventListener('scroll', () => hdr.classList.toggle('on', scrollY > 50), {passive:true});
+// ── Scroll progress bar ──────────────────────────────────────
+const progBar = document.getElementById('progress-bar');
+function updateProgress() {
+  const scrolled = scrollY;
+  const total = document.documentElement.scrollHeight - innerHeight;
+  progBar.style.width = (scrolled / total * 100) + '%';
+}
 
-// Scroll reveal
+// ── Header scroll ────────────────────────────────────────────
+const hdr = document.getElementById('hdr');
+const urgencyH = document.getElementById('urgency')?.offsetHeight || 36;
+window.addEventListener('scroll', () => {
+  hdr.classList.toggle('on', scrollY > urgencyH + 10);
+  updateProgress();
+}, {passive:true});
+
+// ── Scroll reveal ────────────────────────────────────────────
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
 }, {threshold:.1, rootMargin:'0px 0px -50px 0px'});
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-// Pilar accordion
+// ── Pilar accordion ──────────────────────────────────────────
 function togglePil(hd) {
   const item = hd.closest('.pil-item');
   const open = item.classList.contains('open');
@@ -818,7 +1163,30 @@ function togglePil(hd) {
   if (!open) item.classList.add('open');
 }
 
-// Floating petals
+// ── Section nav dots ─────────────────────────────────────────
+const secDots = document.getElementById('sec-dots');
+const sections = Array.from(document.querySelectorAll('[id]')).filter(el =>
+  document.querySelector(`.sdot[data-sec="${el.id}"]`)
+);
+const dots = document.querySelectorAll('.sdot');
+
+dots.forEach(dot => {
+  dot.addEventListener('click', () => {
+    const target = document.getElementById(dot.dataset.sec);
+    if (target) target.scrollIntoView({behavior:'smooth'});
+  });
+});
+
+function updateDots() {
+  const mid = scrollY + innerHeight * 0.4;
+  let activeId = sections[0]?.id;
+  sections.forEach(sec => { if (sec.offsetTop <= mid) activeId = sec.id; });
+  dots.forEach(d => d.classList.toggle('act', d.dataset.sec === activeId));
+  secDots.classList.toggle('show', scrollY > 200);
+}
+window.addEventListener('scroll', updateDots, {passive:true});
+
+// ── Floating petals ──────────────────────────────────────────
 function spawnPetals(id, n, colors) {
   const c = document.getElementById(id);
   if (!c) return;
@@ -845,7 +1213,21 @@ function spawnPetals(id, n, colors) {
 spawnPetals('hero-pts', 22, ['rgba(211,216,173,.5)','rgba(149,175,113,.4)','rgba(189,127,104,.3)','rgba(255,255,255,.15)']);
 spawnPetals('cta-pts',  14, ['rgba(211,216,173,.4)','rgba(149,175,113,.25)','rgba(255,255,255,.1)']);
 
-// Open first pilar on load
+// ── Hero subtle mouse parallax ───────────────────────────────
+const heroEl = document.getElementById('hero');
+heroEl.addEventListener('mousemove', e => {
+  const cx = e.clientX / innerWidth - .5;
+  const cy = e.clientY / innerHeight - .5;
+  heroEl.querySelectorAll('.bot').forEach((el, i) => {
+    const depth = .5 + i * .4;
+    el.style.transform = `${el.style.transform?.split(' rotate')[0] || ''} translate(${cx * 14 * depth}px, ${cy * 8 * depth}px)`;
+  });
+}, {passive:true});
+heroEl.addEventListener('mouseleave', () => {
+  heroEl.querySelectorAll('.bot').forEach(el => { el.style.transform = ''; });
+});
+
+// ── Open first pilar on load ─────────────────────────────────
 setTimeout(() => document.querySelector('.pil-item')?.classList.add('open'), 600);
 </script>
 </body>
